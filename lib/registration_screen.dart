@@ -65,10 +65,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               style: TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
             ),
             Spacer(),
-            Icon(
-              Icons.question_mark_rounded,
-              color: Color.fromRGBO(239, 239, 239, 1),
-            ),
+            SvgPicture.asset('assets/icons/help-circle.svg'),
           ],
         ),
       ),
@@ -81,6 +78,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             children: <Widget>[
               TextFormField(
                 decoration: InputDecoration(
+                  icon: SvgPicture.asset(
+                    'assets/icons/user.svg',
+                    width: 32,
+                    height: 32,
+                  ),
                   labelStyle:
                       TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
                   labelText: 'ФИО',
@@ -100,6 +102,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   FilteringTextInputFormatter.digitsOnly,
                 ],
                 decoration: InputDecoration(
+                  icon: SvgPicture.asset(
+                    'assets/icons/smartphone.svg',
+                    width: 32,
+                    height: 32,
+                  ),
                   labelStyle:
                       TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
                   labelText: 'Номер телефона',
@@ -116,6 +123,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               TextFormField(
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
+                  icon: SvgPicture.asset(
+                    'assets/icons/at-sign.svg',
+                    width: 32,
+                    height: 32,
+                  ),
                   labelStyle:
                       TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
                   labelText: 'E-mail',
@@ -136,6 +148,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 controller: _passwordController,
                 obscureText: _obscureText,
                 decoration: InputDecoration(
+                  icon: SvgPicture.asset(
+                    'assets/icons/lock.svg',
+                    width: 32,
+                    height: 32,
+                  ),
                   labelStyle:
                       TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
                   labelText: 'Пароль',
@@ -163,10 +180,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 controller: _confirmPasswordController,
                 obscureText: _obscureConfirmText,
                 decoration: InputDecoration(
+                  icon: SvgPicture.asset(
+                    'assets/icons/lock.svg',
+                    width: 32,
+                    height: 32,
+                  ),
                   labelStyle:
                       TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
                   labelText: 'Повторите пароль',
-                  hintText: 'Enter your password again',
+                  // hintText: 'Enter your password again',
                   suffixIcon: GestureDetector(
                     onTap: _toggleObscureConfirmText,
                     child: Icon(
@@ -186,8 +208,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
+              const Text('Надежность пароля',
+                  style: TextStyle(
+                    color: Color.fromRGBO(239, 239, 239, 1),
+                  )),
               Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Row(
                     children: [
@@ -209,7 +236,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(width: 16.0),
+                  const SizedBox(width: 16.0),
                   Row(
                     children: [
                       Checkbox(
