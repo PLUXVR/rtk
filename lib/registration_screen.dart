@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 
 class RegistrationScreen extends StatefulWidget {
   @override
@@ -57,10 +58,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.backspace_outlined,
-              color: Color.fromRGBO(239, 239, 239, 1),
-            ),
+            SvgPicture.asset('assets/icons/arrow-left.svg'),
             Spacer(),
             Text(
               'Регистрация',
@@ -120,7 +118,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 decoration: InputDecoration(
                   labelStyle:
                       TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
-                  labelText: 'Электронная почта',
+                  labelText: 'E-mail',
                   // hintText: 'Enter your email',
                 ),
                 validator: (value) {
@@ -194,6 +192,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   Row(
                     children: [
                       Checkbox(
+                        shape: CircleBorder(),
                         value: _minSymbols,
                         onChanged: (value) {
                           setState(() {
@@ -202,16 +201,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         },
                       ),
                       Text(
-                        'Минимум 8 символов',
-                        style:
-                            TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
+                        ' Минимум 8 символов',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Color.fromRGBO(239, 239, 239, 1),
+                        ),
                       ),
                     ],
                   ),
+                  SizedBox(width: 16.0),
                   Row(
                     children: [
-                      SizedBox(width: 16.0),
                       Checkbox(
+                        shape: CircleBorder(),
                         value: _lowerAndUpperCase,
                         onChanged: (value) {
                           setState(() {
@@ -220,16 +222,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         },
                       ),
                       Text(
-                        'Пароль должен содержать буквы верхнего и нижнего регистра',
-                        style:
-                            TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
+                        ' Пароль должен содержать буквы верхнего инижнего \n регистра',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Color.fromRGBO(239, 239, 239, 1),
+                        ),
+                        maxLines: 2,
                       ),
                     ],
                   ),
+                  SizedBox(width: 16.0),
                   Row(
                     children: [
-                      SizedBox(width: 16.0),
                       Checkbox(
+                        shape: CircleBorder(),
                         value: _personalInfoInPass,
                         onChanged: (value) {
                           setState(() {
@@ -238,9 +244,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         },
                       ),
                       Text(
-                        'Не рекомендуется использовать личную информацию (имена, даты рождения, и т.д.) в качестве пароля',
-                        style:
-                            TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
+                        'Не рекомендуется использовать личную информацию \n(имена, даты рождения, и т.д.) в качестве пароля',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Color.fromRGBO(239, 239, 239, 1),
+                        ),
+                        softWrap: true,
                       ),
                     ],
                   ),
