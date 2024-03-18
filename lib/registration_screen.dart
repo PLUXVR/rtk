@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -50,10 +51,28 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(35, 173, 173, 174),
+      backgroundColor: Color.fromRGBO(30, 31, 36, 1),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(133, 133, 134, 1),
-        title: Text('Registration'),
+        backgroundColor: Color.fromRGBO(36, 38, 45, 1),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.backspace_outlined,
+              color: Color.fromRGBO(239, 239, 239, 1),
+            ),
+            Spacer(),
+            Text(
+              'Регистрация',
+              style: TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
+            ),
+            Spacer(),
+            Icon(
+              Icons.question_mark_rounded,
+              color: Color.fromRGBO(239, 239, 239, 1),
+            ),
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -172,58 +191,128 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               SizedBox(height: 16.0),
               Column(
                 children: <Widget>[
-                  Checkbox(
-                    value: _minSymbols,
-                    onChanged: (value) {
-                      setState(() {
-                        _minSymbols = value!;
-                      });
-                    },
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: _minSymbols,
+                        onChanged: (value) {
+                          setState(() {
+                            _minSymbols = value!;
+                          });
+                        },
+                      ),
+                      Text(
+                        'Минимум 8 символов',
+                        style:
+                            TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
+                      ),
+                    ],
                   ),
-                  Text(
-                    'Минимум 8 символов',
-                    style: TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
+                  Row(
+                    children: [
+                      SizedBox(width: 16.0),
+                      Checkbox(
+                        value: _lowerAndUpperCase,
+                        onChanged: (value) {
+                          setState(() {
+                            _lowerAndUpperCase = value!;
+                          });
+                        },
+                      ),
+                      Text(
+                        'Пароль должен содержать буквы верхнего и нижнего регистра',
+                        style:
+                            TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
+                      ),
+                    ],
                   ),
-                  SizedBox(width: 16.0),
-                  Checkbox(
-                    value: _lowerAndUpperCase,
-                    onChanged: (value) {
-                      setState(() {
-                        _lowerAndUpperCase = value!;
-                      });
-                    },
-                  ),
-                  Text(
-                    'Пароль должен содержать буквы верхнего и нижнего регистра',
-                    style: TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
-                  ),
-                  SizedBox(width: 16.0),
-                  Checkbox(
-                    value: _personalInfoInPass,
-                    onChanged: (value) {
-                      setState(() {
-                        _personalInfoInPass = value!;
-                      });
-                    },
-                  ),
-                  Text(
-                    'Не рекомендуется использовать личную информацию (имена, даты рождения, и т.д.) в качестве пароля',
-                    style: TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
+                  Row(
+                    children: [
+                      SizedBox(width: 16.0),
+                      Checkbox(
+                        value: _personalInfoInPass,
+                        onChanged: (value) {
+                          setState(() {
+                            _personalInfoInPass = value!;
+                          });
+                        },
+                      ),
+                      Text(
+                        'Не рекомендуется использовать личную информацию (имена, даты рождения, и т.д.) в качестве пароля',
+                        style:
+                            TextStyle(color: Color.fromRGBO(239, 239, 239, 1)),
+                      ),
+                    ],
                   ),
                 ],
               ),
               SizedBox(height: 32.0),
-              ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        Color.fromRGBO(173, 173, 174, 1))),
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    // Process registration form here
-                  }
-                },
-                child: Text(''),
-              ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                decoration: BoxDecoration(
+                  border: Border(
+                    left: BorderSide(color: Color(0xFF24252B)),
+                    top: BorderSide(width: 1, color: Color(0xFF24252B)),
+                    right: BorderSide(color: Color(0xFF24252B)),
+                    bottom: BorderSide(color: Color(0xFF24252B)),
+                  ),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 528,
+                      height: 72,
+                      padding: const EdgeInsets.all(20),
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF24252B),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        shadows: [
+                          BoxShadow(
+                            color: Color(0x3F000000),
+                            blurRadius: 4,
+                            offset: Offset(0, 4),
+                            spreadRadius: 0,
+                          )
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Далее',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Color(0xFF858586),
+                              fontSize: 20,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w500,
+                              height: 0.07,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+              // ElevatedButton(
+              //   style: ButtonStyle(
+              //       backgroundColor: MaterialStateProperty.all(
+              //           Color.fromRGBO(173, 173, 174, 1))),
+              //   onPressed: () {
+              //     if (_formKey.currentState!.validate()) {
+              //       // Process registration form here
+              //     }
+              //   },
+              //   child: Text(''),
+              // ),
             ],
           ),
         ),
