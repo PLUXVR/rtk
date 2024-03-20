@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rtk/colors/colors.dart';
@@ -106,6 +107,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your full name';
+                      // return SizedBox(
+                      //   width: 50,
+                      //   height: 50,
+                      // );
                     }
                     return null;
                   },
@@ -424,71 +429,37 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
               const SizedBox(height: 32.0),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-                decoration: BoxDecoration(
+                width: double.infinity,
+                // padding: const EdgeInsets.symmetric(
+                //   vertical: 24,
+                //   horizontal: 32,
+                // ),
+                decoration: const BoxDecoration(
                   border: Border(
-                    left: BorderSide(color: Color(0xFF24252B)),
                     top: BorderSide(width: 1, color: Color(0xFF24252B)),
-                    right: BorderSide(color: Color(0xFF24252B)),
-                    bottom: BorderSide(color: Color(0xFF24252B)),
                   ),
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 528,
-                      height: 72,
-                      padding: const EdgeInsets.all(20),
-                      decoration: ShapeDecoration(
-                        color: Color(0xFF24252B),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        shadows: [
-                          BoxShadow(
-                            color: Color(0x3F000000),
-                            blurRadius: 4,
-                            offset: Offset(0, 4),
-                            spreadRadius: 0,
-                          )
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Далее',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Color(0xFF858586),
-                              fontSize: 20,
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w500,
-                              height: 0.07,
-                            ),
-                          ),
-                        ],
-                      ),
+                child: SizedBox(
+                  height: 72,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(buttonNextColor),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ))),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        // Процесс регистрации
+                      }
+                    },
+                    child: Text(
+                      'Далее',
+                      style: TextStyle(color: buttonNextColorText),
                     ),
-                  ],
+                  ),
                 ),
-              )
-              // ElevatedButton(
-              //   style: ButtonStyle(
-              //       backgroundColor: MaterialStateProperty.all(
-              //           Color.fromRGBO(173, 173, 174, 1))),
-              //   onPressed: () {
-              //     if (_formKey.currentState!.validate()) {
-              //       // Process registration form here
-              //     }
-              //   },
-              //   child: Text(''),
-              // ),
+              ),
             ],
           ),
         ),
