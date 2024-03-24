@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_rtk/colors/colors.dart';
+import 'package:flutter_rtk/src/app/colors/colors.dart';
+import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/registration_app_bar.dart';
 import 'package:flutter_svg/svg.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -18,13 +19,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   bool _obscureText = true;
   bool _obscureConfirmText = true;
-  // Чек боксы после для надежности пароля
+  // Чек боксы для надежности пароля
   bool _minSymbols = false;
   bool _lowerAndUpperCase = false;
   bool _personalInfoInPass = false;
-  Color _minSymbolsCheckBoxTextColor = textColor;
-  Color _lowerAndUpperCaseCheckBoxTextColor = textColor;
-  Color _personalInfoTextColor = textColor;
+  Color _minSymbolsCheckBoxTextColor = checkBoxTextColor;
+  Color _lowerAndUpperCaseCheckBoxTextColor = checkBoxTextColor;
+  Color _personalInfoTextColor = checkBoxTextColor;
 
   @override
   void dispose() {
@@ -58,22 +59,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bodyBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: appBarBackground,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset('assets/icons/arrow-left.svg'),
-            const Spacer(),
-            Text(
-              'Регистрация',
-              style: TextStyle(color: textColor),
-            ),
-            const Spacer(),
-            SvgPicture.asset('assets/icons/help-circle.svg'),
-          ],
-        ),
-      ),
+      appBar: const RegistrationAppBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -152,40 +138,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
               ),
               const SizedBox(height: 24.0),
-              Container(
-                decoration: BoxDecoration(
-                  color: inputBackgroundColor,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    topRight: Radius.circular(8),
-                  ),
-                ),
-                child: TextFormField(
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: SvgPicture.asset(
-                        'assets/icons/at-sign.svg',
-                        width: 32,
-                        height: 32,
-                      ),
-                    ),
-                    labelStyle: TextStyle(color: textColor),
-                    labelText: 'E-mail',
-                    // hintText: 'Enter your email',
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    if (!value.contains('@')) {
-                      return 'Please enter a valid email address';
-                    }
-                    return null;
-                  },
-                ),
-              ),
+
+              // Передаланное поле для ввода
+              InputField(),fefefe
+
+
               const SizedBox(height: 24.0),
               Container(
                 decoration: BoxDecoration(
@@ -467,3 +424,5 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
   }
 }
+
+

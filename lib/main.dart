@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rtk/registration_screen.dart';
+import 'package:flutter_rtk/src/app/modules/registration_screen/registration_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,12 +8,9 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter RTK',
-      home: RegistrationScreen(),
-    );
-  }
+  Widget build(BuildContext context) => const MaterialApp(
+        title: 'Flutter RTK',
+        home: RegistrationScreen(),
+      );
 }
