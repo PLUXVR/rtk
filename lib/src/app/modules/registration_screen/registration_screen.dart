@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/registration_app_bar.dart';
+import 'package:flutter_rtk/src/app/widgets/input_field.dart/input_field.dart';
 import 'package:flutter_svg/svg.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -68,82 +69,87 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               const SizedBox(height: 20.0),
-              Container(
-                decoration: BoxDecoration(
-                  color: inputBackgroundColor,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    topRight: Radius.circular(8),
-                  ),
+              // ФИО
+              InputField(
+                labelText: 'ФИО',
+                icon: SvgPicture.asset(
+                  'assets/icons/user.svg',
+                  width: 32,
+                  height: 32,
                 ),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: SvgPicture.asset(
-                        'assets/icons/user.svg',
-                        width: 32,
-                        height: 32,
-                      ),
-                    ),
-                    labelStyle: TextStyle(color: textColor),
-                    labelText: 'ФИО',
-                    // hintText: 'Enter your full name',
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your full name';
-                      // return SizedBox(
-                      //   width: 50,
-                      //   height: 50,
-                      // );
-                    }
-                    return null;
-                  },
-                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Пожалуйста введите ФИО';
+                  }
+                  return null;
+                },
               ),
+
               const SizedBox(height: 24.0),
-              Container(
-                decoration: BoxDecoration(
-                  color: inputBackgroundColor,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    topRight: Radius.circular(8),
-                  ),
+
+              // Номер телефона
+              InputField(
+                labelText: 'Номер телефона',
+                keyboardType: TextInputType.phone,
+                icon: SvgPicture.asset(
+                  'assets/icons/smartphone.svg',
+                  width: 32,
+                  height: 32,
                 ),
-                child: TextFormField(
-                  keyboardType: TextInputType.phone,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                  ],
-                  decoration: InputDecoration(
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: SvgPicture.asset(
-                        'assets/icons/smartphone.svg',
-                        width: 32,
-                        height: 32,
-                      ),
-                    ),
-                    labelStyle: TextStyle(color: textColor),
-                    labelText: 'Номер телефона',
-                    // hintText: 'Enter your phone number',
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your phone number';
-                    }
-                    return null;
-                  },
-                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Пожалуйста введите номер телефона';
+                  }
+                  return null;
+                },
               ),
-              const SizedBox(height: 24.0),
-
-              // Передаланное поле для ввода
-              InputField(),fefefe
-
 
               const SizedBox(height: 24.0),
+
+              // Электронная почта
+              InputField(
+                labelText: 'Email',
+                keyboardType: TextInputType.emailAddress,
+                icon: SvgPicture.asset(
+                  'assets/icons/at-sign.svg',
+                  width: 32,
+                  height: 32,
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Пожалуйста введите email';
+                  }
+                  if (!value.contains('@')) {
+                    return 'Пожалуйста введите корректный email';
+                  }
+                  return null;
+                },
+              ),
+
+              const SizedBox(height: 24.0),
+
+              // TODO Доделать InputField по пароль
+
+              // // Пароль
+              // InputField(
+              //   labelText: 'Пароль',
+              //   icon: SvgPicture.asset(
+              //     'assets/icons/at-sign.svg',
+              //     width: 32,
+              //     height: 32,
+              //   ),
+              //   validator: (value) {
+              //     if (value == null || value.isEmpty) {
+              //       return 'Please enter your password';
+              //     }
+              //     if (value.length < 6) {
+              //       return 'Password must be at least 6 characters long';
+              //     }
+              //     _checkPassword(value);
+              //     return null;
+              //   },
+              // ),
+
               Container(
                 decoration: BoxDecoration(
                   color: inputBackgroundColor,
@@ -176,16 +182,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
+                      return 'Пожалуйста введите пароль';
                     }
                     if (value.length < 6) {
-                      return 'Password must be at least 6 characters long';
+                      return 'Пароль должен быть больше 6 символов';
                     }
                     _checkPassword(value);
                     return null;
                   },
                 ),
               ),
+
               const SizedBox(height: 24.0),
               Container(
                 decoration: BoxDecoration(
@@ -221,15 +228,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please confirm your password';
+                      return 'Пожалуйста подтвердите пароль';
                     }
                     if (value != _passwordController.text) {
-                      return 'Passwords do not match';
+                      return 'Пароли не совпадают';
                     }
                     return null;
                   },
                 ),
               ),
+
               const SizedBox(height: 24.0),
               const Text('Надежность пароля',
                   style: TextStyle(
@@ -424,5 +432,3 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
   }
 }
-
-
