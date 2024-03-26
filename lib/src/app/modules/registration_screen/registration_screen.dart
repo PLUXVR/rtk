@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
@@ -17,9 +16,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _formKey = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-
-  bool _obscureText = true;
-  bool _obscureConfirmText = true;
+  // Проверка на соответствие паролей
+  bool _passMatch = true;
   // Чек боксы для надежности пароля
   bool _minSymbols = false;
   bool _lowerAndUpperCase = false;
@@ -35,17 +33,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     super.dispose();
   }
 
-  void _toggleObscureText() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
+  // Скрыть текст или показать
+  // bool _obscureText = true;
+  // bool _obscureConfirmText = true;
+  // void _toggleObscureText() {
+  //   setState(() {
+  //     _obscureText = !_obscureText;
+  //   });
+  // }
 
-  void _toggleObscureConfirmText() {
-    setState(() {
-      _obscureConfirmText = !_obscureConfirmText;
-    });
-  }
+  // void _toggleObscureConfirmText() {
+  //   setState(() {
+  //     _obscureConfirmText = !_obscureConfirmText;
+  //   });
+  // }
 
   void _checkPassword(String password) {
     setState(() {
@@ -160,7 +161,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
                 child: TextFormField(
                   controller: _passwordController,
-                  obscureText: _obscureText,
+                  obscureText: true,
                   decoration: InputDecoration(
                     prefixIcon: Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -172,12 +173,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                     labelStyle: TextStyle(color: textColor),
                     labelText: 'Пароль',
-                    // hintText: 'Enter your password',
-                    suffixIcon: GestureDetector(
-                      onTap: _toggleObscureText,
-                      child: Icon(
-                        _obscureText ? Icons.visibility_off : Icons.visibility,
-                      ),
+                    // hintText: 'Введите пароль',
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: _passMatch
+                          ? null
+                          : SvgPicture.asset(
+                              'assets/icons/alert-circle.svg',
+                            ),
                     ),
                   ),
                   validator: (value) {
@@ -204,7 +207,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
                 child: TextFormField(
                   controller: _confirmPasswordController,
-                  obscureText: _obscureConfirmText,
+                  obscureText: true,
                   decoration: InputDecoration(
                     prefixIcon: Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -216,23 +219,50 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                     labelStyle: TextStyle(color: textColor),
                     labelText: 'Повторите пароль',
-                    // hintText: 'Enter your password again',
+                    // hintText: 'Введите пароль снова',
                     suffixIcon: GestureDetector(
-                      onTap: _toggleObscureConfirmText,
-                      child: Icon(
-                        _obscureConfirmText
-                            ? Icons.visibility_off
-                            : Icons.visibility,
+                      onTap: () {},
+                      // _toggleObscureConfirmText,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: _passMatch
+                            ? null
+                            : SvgPicture.asset(
+                                'assets/icons/alert-circle.svg',
+                              ),
                       ),
+                      // Icon(
+                      //   _obscureConfirmText
+                      //       ? Icons.visibility_off
+                      //       : Icons.visibility,
+                      // ),
                     ),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
+                      setState(() {
+                        _passMatch = false;
+                      });
                       return 'Пожалуйста подтвердите пароль';
                     }
                     if (value != _passwordController.text) {
+                      setState(() {
+                        _passMatch = false;
+                      });
                       return 'Пароли не совпадают';
+                    } else {
+                      setState(() {
+                        _passMatch = true;
+                      });
                     }
+                    value.length >= 8
+                        ? setState(() {
+                            _minSymbols = true;
+                          })
+                        : setState(() {
+                            _minSymbols = false;
+                          });
+
                     return null;
                   },
                 ),
