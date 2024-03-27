@@ -14,6 +14,7 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _formKey = GlobalKey<FormState>();
+  // Для сохранения значения поля ввода паролей
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   // Проверка на соответствие паролей
@@ -48,14 +49,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   //   });
   // }
 
-  void _checkPassword(String password) {
-    setState(() {
-      _minSymbols = password.contains(RegExp(r'[A-Z]'));
-      _lowerAndUpperCase = password.contains(RegExp(r'[0-9]'));
-      _personalInfoInPass =
-          password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
-    });
-  }
+  // void _checkPassword(String password) {
+  //   setState(() {
+  //     _minSymbols = password.contains(RegExp(r'[A-Z]'));
+  //     _lowerAndUpperCase = password.contains(RegExp(r'[0-9]'));
+  //     _personalInfoInPass =
+  //         password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -129,143 +130,91 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
               const SizedBox(height: 24.0),
 
-              // TODO Доделать InputField по пароль
+              // Поле ввода пароля
 
-              // // Пароль
-              // InputField(
-              //   labelText: 'Пароль',
-              //   icon: SvgPicture.asset(
-              //     'assets/icons/at-sign.svg',
-              //     width: 32,
-              //     height: 32,
-              //   ),
-              //   validator: (value) {
-              //     if (value == null || value.isEmpty) {
-              //       return 'Please enter your password';
-              //     }
-              //     if (value.length < 6) {
-              //       return 'Password must be at least 6 characters long';
-              //     }
-              //     _checkPassword(value);
-              //     return null;
-              //   },
-              // ),
-
-              Container(
-                decoration: BoxDecoration(
-                  color: inputBackgroundColor,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    topRight: Radius.circular(8),
-                  ),
+              InputField(
+                controller: _passwordController,
+                labelText: 'Пароль',
+                obcureText: true,
+                icon: SvgPicture.asset(
+                  'assets/icons/lock.svg',
+                  width: 32,
+                  height: 32,
                 ),
-                child: TextFormField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: SvgPicture.asset(
-                        'assets/icons/lock.svg',
-                        width: 32,
-                        height: 32,
-                      ),
-                    ),
-                    labelStyle: TextStyle(color: textColor),
-                    labelText: 'Пароль',
-                    // hintText: 'Введите пароль',
-                    suffixIcon: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: _passMatch
-                          ? null
-                          : SvgPicture.asset(
-                              'assets/icons/alert-circle.svg',
-                            ),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Пожалуйста введите пароль';
-                    }
-                    if (value.length < 6) {
-                      return 'Пароль должен быть больше 6 символов';
-                    }
-                    _checkPassword(value);
-                    return null;
-                  },
+                suffixIcon: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: _passMatch
+                      ? null
+                      : SvgPicture.asset(
+                          'assets/icons/alert-circle.svg',
+                        ),
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Пожалуйста введите пароль';
+                  }
+                  if (value.length < 6) {
+                    return 'Пароль должен быть больше 6 символов';
+                  }
+                  // _checkPassword(value);
+                  return null;
+                },
               ),
 
               const SizedBox(height: 24.0),
-              Container(
-                decoration: BoxDecoration(
-                  color: inputBackgroundColor,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    topRight: Radius.circular(8),
-                  ),
-                ),
-                child: TextFormField(
-                  controller: _confirmPasswordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: SvgPicture.asset(
-                        'assets/icons/lock.svg',
-                        width: 32,
-                        height: 32,
-                      ),
-                    ),
-                    labelStyle: TextStyle(color: textColor),
-                    labelText: 'Повторите пароль',
-                    // hintText: 'Введите пароль снова',
-                    suffixIcon: GestureDetector(
-                      onTap: () {},
-                      // _toggleObscureConfirmText,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: _passMatch
-                            ? null
-                            : SvgPicture.asset(
-                                'assets/icons/alert-circle.svg',
-                              ),
-                      ),
-                      // Icon(
-                      //   _obscureConfirmText
-                      //       ? Icons.visibility_off
-                      //       : Icons.visibility,
-                      // ),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      setState(() {
-                        _passMatch = false;
-                      });
-                      return 'Пожалуйста подтвердите пароль';
-                    }
-                    if (value != _passwordController.text) {
-                      setState(() {
-                        _passMatch = false;
-                      });
-                      return 'Пароли не совпадают';
-                    } else {
-                      setState(() {
-                        _passMatch = true;
-                      });
-                    }
-                    value.length >= 8
-                        ? setState(() {
-                            _minSymbols = true;
-                          })
-                        : setState(() {
-                            _minSymbols = false;
-                          });
 
-                    return null;
-                  },
+              InputField(
+                controller: _confirmPasswordController,
+                labelText: 'Повторите пароль',
+                obcureText: true,
+                icon: SvgPicture.asset(
+                  'assets/icons/lock.svg',
+                  width: 32,
+                  height: 32,
                 ),
+                suffixIcon: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  // Icon(
+                  //   _obscureConfirmText
+                  //       ? Icons.visibility_off
+                  //       : Icons.visibility,
+                  // ),
+                  child: _passMatch
+                      ? null
+                      : SvgPicture.asset(
+                          'assets/icons/alert-circle.svg',
+                        ),
+                ),
+                validator: (value) {
+                  // Проверка пароля на отсутствие значения
+                  if (value == null || value.isEmpty) {
+                    setState(() {
+                      _passMatch = false;
+                    });
+                    return 'Пожалуйста подтвердите пароль';
+                  }
+                  // Проверка пароля на соответствие паролей
+                  if (value != _passwordController.text) {
+                    setState(() {
+                      _passMatch = false;
+                    });
+                    return 'Пароли не совпадают';
+                  } else {
+                    setState(() {
+                      _passMatch = true;
+                    });
+                  }
+                  // Проверка пароля на нужное количество символов
+                  value.length >= 8
+                      ? setState(() {
+                          _minSymbols = true;
+                        })
+                      : setState(() {
+                          _minSymbols = false;
+                        });
+
+                  return null;
+                },
               ),
 
               const SizedBox(height: 24.0),

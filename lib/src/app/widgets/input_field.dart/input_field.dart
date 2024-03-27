@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class InputField extends StatelessWidget {
+  final TextEditingController? controller;
+  final bool? obcureText;
   final Color? inputBackgroundColor;
   final Widget? icon;
   final String? labelText;
@@ -14,6 +16,8 @@ class InputField extends StatelessWidget {
   //TODO Доделать конструктор
   const InputField({
     super.key,
+    this.controller,
+    this.obcureText,
     this.inputBackgroundColor,
     this.icon,
     this.suffixIcon,
@@ -35,6 +39,8 @@ class InputField extends StatelessWidget {
         ),
       ),
       child: TextFormField(
+        controller: controller,
+        obscureText: obcureText ?? false,
         style: TextStyle(
           color: textColor ?? const Color.fromRGBO(239, 239, 239, 1),
         ),
