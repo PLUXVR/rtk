@@ -8,6 +8,8 @@ class DefaultCheckBox extends StatefulWidget {
   final Widget? checkBoxIcon;
   final Color? checkBoxTextColor;
   final Color? checkBoxBorderColor;
+  final double? checkBoxHeight;
+  final double? checkBoxWidth;
 
   const DefaultCheckBox({
     super.key,
@@ -15,6 +17,8 @@ class DefaultCheckBox extends StatefulWidget {
     this.checkBoxIcon,
     this.checkBoxTextColor,
     this.checkBoxBorderColor,
+    this.checkBoxHeight,
+    this.checkBoxWidth,
   });
 
   @override
@@ -29,7 +33,7 @@ class _DefaultCheckBoxState extends State<DefaultCheckBox> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Text(
@@ -39,14 +43,14 @@ class _DefaultCheckBoxState extends State<DefaultCheckBox> {
               color: textColor,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           GestureDetector(
             // onTap: () {},
             child: AnimatedContainer(
-                height: 24,
-                width: 24,
+                height: widget.checkBoxHeight ?? 24,
+                width: widget.checkBoxWidth ?? 24,
                 duration: Duration(milliseconds: 500),
                 curve: Curves.fastLinearToSlowEaseIn,
                 decoration: BoxDecoration(
@@ -55,7 +59,7 @@ class _DefaultCheckBoxState extends State<DefaultCheckBox> {
                         width: 1.5,
                         color: widget.checkBoxBorderColor ?? checkBoxTextColor),
                     borderRadius: BorderRadius.circular(Checkbox.width)),
-                child: widget.checkBoxIcon),
+                child: widget.isChecked ? widget.checkBoxIcon : null),
           ),
         ],
       ),
