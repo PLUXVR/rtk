@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/registration_app_bar.dart';
 import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/registration_body.dart';
@@ -287,11 +289,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                       ),
                     ),
-                    Text(
-                      ' Пароль должен содержать буквы верхнего и нижнего \n регистра',
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: _lowerAndUpperCaseCheckBoxTextColor,
+                    Container(
+                      constraints: const BoxConstraints(maxWidth: 350),
+                      child: Text(
+                        'Пароль должен содержать буквы верхнего и нижнего регистра',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: _lowerAndUpperCaseCheckBoxTextColor,
+                        ),
                       ),
                     ),
                   ],
@@ -334,11 +339,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                       ),
                     ),
-                    Text(
-                      'Не рекомендуется использовать личную информацию \n(имена, даты рождения, и т.д.) в качестве пароля',
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: _personalInfoTextColor,
+                    Container(
+                      constraints: BoxConstraints(maxWidth: 350),
+                      child: Text(
+                        'Не рекомендуется использовать личную информацию(имена, даты рождения, и т.д.) в качестве пароля',
+                        overflow: TextOverflow.fade,
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: _personalInfoTextColor,
+                        ),
                       ),
                     ),
                   ],
