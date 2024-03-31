@@ -13,7 +13,6 @@ class InputField extends StatelessWidget {
   final TextInputType? keyboardType;
   final String? Function(String?) validator;
 
-  //TODO Доделать конструктор
   const InputField({
     super.key,
     this.controller,
@@ -60,7 +59,6 @@ class InputField extends StatelessWidget {
               fontSize: 16,
             ),
             labelText: labelText ?? '???',
-            // hintText: hintText ?? '??',
             suffixIcon: suffixIcon),
         validator: validator,
       ),

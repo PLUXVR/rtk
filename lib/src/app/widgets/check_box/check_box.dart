@@ -2,66 +2,79 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
+import 'package:flutter_svg/svg.dart';
 
-class DefaultCheckBox extends StatefulWidget {
-  final bool isChecked;
-  final Widget? checkBoxIcon;
-  final Color? checkBoxTextColor;
+class DefaultCheckBox extends StatelessWidget {
+  final bool isValid;
+  final bool isError;
   final Color? checkBoxBorderColor;
   final double? checkBoxHeight;
   final double? checkBoxWidth;
+  final String? checkBoxText;
 
   const DefaultCheckBox({
     super.key,
-    required this.isChecked,
-    this.checkBoxIcon,
-    this.checkBoxTextColor,
+    required this.isValid,
+    required this.isError,
     this.checkBoxBorderColor,
     this.checkBoxHeight,
     this.checkBoxWidth,
+    this.checkBoxText,
   });
 
-  @override
-  State<StatefulWidget> createState() => _DefaultCheckBoxState();
-}
-
-class _DefaultCheckBoxState extends State<DefaultCheckBox> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(
-            height: 30,
-          ),
-          Text(
-            'Надежность пароля',
-            style: TextStyle(
-              fontSize: 13,
-              color: textColor,
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+              // onTap: () {},
+              child: AnimatedContainer(
+                  height: checkBoxHeight ?? 24,
+                  width: checkBoxWidth ?? 24,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      border: Border.all(
+                          width: 2.5,
+                          color: isError ? wrongTextColor : Color(0xFFC0BBC9)),
+                      borderRadius: BorderRadius.circular(Checkbox.width)),
+                  child: isError
+                      ? Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: SvgPicture.asset(
+                            'assets/icons/wrong.svg',
+                          ),
+                        )
+                      : isValid
+                          ? Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: SvgPicture.asset('assets/icons/done.svg'),
+                            )
+                          : null),
             ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          GestureDetector(
-            // onTap: () {},
-            child: AnimatedContainer(
-                height: widget.checkBoxHeight ?? 24,
-                width: widget.checkBoxWidth ?? 24,
-                duration: Duration(milliseconds: 500),
-                curve: Curves.fastLinearToSlowEaseIn,
-                decoration: BoxDecoration(
-                    color: widget.checkBoxTextColor ?? bodyBackgroundColor,
-                    border: Border.all(
-                        width: 1.5,
-                        color: widget.checkBoxBorderColor ?? checkBoxTextColor),
-                    borderRadius: BorderRadius.circular(Checkbox.width)),
-                child: widget.isChecked ? widget.checkBoxIcon : null),
-          ),
-        ],
+            const SizedBox(
+              width: 8,
+            ),
+            Flexible(
+              child: Text(
+                checkBoxText ?? "",
+                style: TextStyle(
+                  fontSize: 13,
+                  color: isError
+                      ? wrongTextColor
+                      : isValid
+                          ? doneTextColor
+                          : checkBoxTextColor,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
