@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/registration_app_bar.dart';
 import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/registration_body.dart';
-import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/validation_block.dart';
+import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/validation_widget.dart';
 import 'package:flutter_rtk/src/app/widgets/input_field.dart/input_field.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -63,6 +63,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 width: 32,
                 height: 32,
               ),
+              autoValidate: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Пожалуйста введите ФИО';
@@ -79,6 +80,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 width: 32,
                 height: 32,
               ),
+              autoValidate: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Пожалуйста введите номер телефона';
@@ -95,6 +97,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 width: 32,
                 height: 32,
               ),
+              autoValidate: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Пожалуйста введите email';
@@ -123,6 +126,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         'assets/icons/alert-circle.svg',
                       ),
               ),
+              autoValidate: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Пожалуйста введите пароль';
@@ -151,39 +155,33 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         'assets/icons/alert-circle.svg',
                       ),
               ),
+              autoValidate: AutovalidateMode.onUserInteraction,
               validator: (value) {
+                //TODO Проверка в момент ввода https://codewithandrea.com/articles/flutter-text-field-form-validation/
                 // Проверка пароля на отсутствие значения
                 if (value == null || value.isEmpty) {
                   setState(() {
                     _passMatch = false;
                   });
+
                   return 'Пожалуйста подтвердите пароль';
                 }
                 // Проверка пароля на соответствие паролей
                 if (value != _passwordController.text) {
-                  setState(() {
-                    _passMatch = false;
-                  });
+                  _passMatch = false;
+
                   return 'Пароли не совпадают';
                 } else {
-                  setState(() {
-                    _passMatch = true;
-                  });
+                  _passMatch = true;
                 }
                 // Проверка пароля на нужное количество символов
-                value.length >= 8
-                    ? setState(() {
-                        _minSymbols = true;
-                      })
-                    : setState(() {
-                        _minSymbols = false;
-                      });
+                value.length >= 8 ? _minSymbols = true : _minSymbols = false;
 
                 return null;
               },
             ),
           ),
-          ValidationBlock(),
+          ValidationWidget(),
           //TODO Сделать отдельный компонент
           // Padding(
           //   padding: const EdgeInsets.only(left: 16.0),

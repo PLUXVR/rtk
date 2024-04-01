@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 
 class InputField extends StatelessWidget {
   final TextEditingController? controller;
+  final AutovalidateMode? autoValidate;
   final bool? obcureText;
   final Color? inputBackgroundColor;
   final Widget? icon;
@@ -16,6 +17,7 @@ class InputField extends StatelessWidget {
   const InputField({
     super.key,
     this.controller,
+    this.autoValidate,
     this.obcureText,
     this.inputBackgroundColor,
     this.icon,
@@ -39,6 +41,7 @@ class InputField extends StatelessWidget {
       ),
       child: TextFormField(
         controller: controller,
+        autovalidateMode: autoValidate,
         obscureText: obcureText ?? false,
         style: TextStyle(
           color: textColor ?? const Color.fromRGBO(239, 239, 239, 1),

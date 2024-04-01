@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
 
-class ValidationBlock extends StatelessWidget {
+class ValidationWidget extends StatelessWidget {
   final bool isAllValid;
 
-  const ValidationBlock({
+  const ValidationWidget({
     super.key,
     this.isAllValid = true,
   });

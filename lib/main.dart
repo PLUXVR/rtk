@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/validation_block.dart';
+import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/validation_widget.dart';
 import 'package:flutter_rtk/src/app/modules/registration_screen/registration_screen.dart';
 import 'package:flutter_rtk/src/app/widgets/check_box/check_box.dart';
 
