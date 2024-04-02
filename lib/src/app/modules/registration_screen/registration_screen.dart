@@ -5,6 +5,7 @@ import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/registration_app_bar.dart';
 import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/registration_body.dart';
 import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/validation_widget.dart';
+import 'package:flutter_rtk/src/app/widgets/check_box/check_box.dart';
 import 'package:flutter_rtk/src/app/widgets/input_field.dart/input_field.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -23,12 +24,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   // Проверка на соответствие паролей
   bool _passMatch = true;
   // Чек боксы для надежности пароля
-  bool _minSymbols = false;
-  bool _lowerAndUpperCase = false;
-  bool _personalInfoInPass = false;
-  Color _minSymbolsCheckBoxTextColor = checkBoxTextColor;
-  Color _lowerAndUpperCaseCheckBoxTextColor = checkBoxTextColor;
-  Color _personalInfoTextColor = checkBoxTextColor;
+  bool _minSymbolsError = false;
+  bool _lowerAndUpperCaseError = false;
+  bool _personalInfoInPassError = false;
+  bool _minSymbolsValid = false;
+  bool _lowerAndUpperCaseValid = false;
+  bool _personalInfoInPassValid = false;
 
   @override
   void dispose() {
@@ -159,7 +160,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               validator: (value) {
                 //TODO Проверка в момент ввода https://codewithandrea.com/articles/flutter-text-field-form-validation/
                 // Проверка пароля на отсутствие значения
-                if (value == null || value.isEmpty) {
+                if (value == null) {
                   setState(() {
                     _passMatch = false;
                   });
@@ -174,15 +175,50 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 } else {
                   _passMatch = true;
                 }
+                // TODO сделать проверку
                 // Проверка пароля на нужное количество символов
-                value.length >= 8 ? _minSymbols = true : _minSymbols = false;
+                // if (value.length >= 8) {
+                //   setState(() {
+                //     _minSymbolsError = true;
+                //     _minSymbolsValid = false;
+                //   });
+                // } else {
+                //   setState(() {
+                //     _minSymbolsError = true;
+                //     _minSymbolsValid = false;
+                //   });
+                // }
+                setState(() {
+                  value.length >= 8
+                      ? _minSymbolsError = false
+                      : _minSymbolsError = true;
+                });
 
                 return null;
               },
             ),
           ),
-          ValidationWidget(),
-          //TODO Сделать отдельный компонент
+          // Поля валидации пароля
+          ValidationPasswordWidget(
+            minSymbolsCheckBox: DefaultCheckBox(
+              isError: _minSymbolsError,
+              isValid: _minSymbolsValid,
+              checkBoxText: 'Минимум 8 символов',
+            ),
+            lowerAndUpperCaseCheckBox: DefaultCheckBox(
+              isError: _lowerAndUpperCaseError,
+              isValid: _lowerAndUpperCaseValid,
+              checkBoxText:
+                  'Пароль должен содержать буквы верхнего и нижнего регистра',
+            ),
+            personalInfoInPassCheckBox: DefaultCheckBox(
+              isError: _personalInfoInPassError,
+              isValid: _personalInfoInPassValid,
+              checkBoxText:
+                  'Не рекомендуется использовать личную информацию (имена, даты рождения и т.д.) в качестве пароля',
+            ),
+          ),
+
           // Padding(
           //   padding: const EdgeInsets.only(left: 16.0),
           //   child: Column(
