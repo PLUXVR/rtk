@@ -132,8 +132,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 if (value == null || value.isEmpty) {
                   return 'Пожалуйста введите пароль';
                 }
-                if (value.length < 6) {
-                  return 'Пароль должен быть больше 6 символов';
+                if (value.length < 8) {
+                  return 'Пароль должен быть больше 8 символов';
                 }
                 // _checkPassword(value);
                 return null;
@@ -158,13 +158,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
               autoValidate: AutovalidateMode.onUserInteraction,
               validator: (value) {
-                //TODO Проверка в момент ввода https://codewithandrea.com/articles/flutter-text-field-form-validation/
+                //  TODO Проверка в момент ввода https://codewithandrea.com/articles/flutter-text-field-form-validation/
                 // Проверка пароля на отсутствие значения
-                if (value == null) {
-                  setState(() {
-                    _passMatch = false;
-                  });
-
+                WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                  if (value!.length >= 8) {
+                    setState(() {
+                      _minSymbolsError = false;
+                      _minSymbolsValid = true;
+                    });
+                  } else {
+                    setState(() {
+                      _minSymbolsError = true;
+                      _minSymbolsValid = false;
+                    });
+                  }
+                });
+                if (value == null || value.isEmpty) {
+                  _passMatch = false;
                   return 'Пожалуйста подтвердите пароль';
                 }
                 // Проверка пароля на соответствие паролей
@@ -175,24 +185,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 } else {
                   _passMatch = true;
                 }
-                // TODO сделать проверку
+
                 // Проверка пароля на нужное количество символов
-                // if (value.length >= 8) {
-                //   setState(() {
-                //     _minSymbolsError = true;
-                //     _minSymbolsValid = false;
-                //   });
-                // } else {
-                //   setState(() {
-                //     _minSymbolsError = true;
-                //     _minSymbolsValid = false;
-                //   });
-                // }
-                setState(() {
-                  value.length >= 8
-                      ? _minSymbolsError = false
-                      : _minSymbolsError = true;
-                });
 
                 return null;
               },
@@ -219,172 +213,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ),
           ),
 
-          // Padding(
-          //   padding: const EdgeInsets.only(left: 16.0),
-          //   child: Column(
-          //     mainAxisAlignment: MainAxisAlignment.start,
-          //     children: <Widget>[
-          //       const Row(
-          //         children: [
-          //           Text('Надежность пароля',
-          //               style: TextStyle(
-          //                 fontSize: 13,
-          //                 color: Color.fromRGBO(239, 239, 239, 1),
-          //               )),
-          //         ],
-          //       ),
-          //       const SizedBox(height: 16.0),
-          //       Row(
-          //         children: [
-          //           Padding(
-          //             padding: const EdgeInsets.only(right: 8.0),
-          //             child: SizedBox(
-          //               height: 30,
-          //               width: 15,
-          //               child: Checkbox(
-          //                 checkColor: doneTextColor,
-          //                 activeColor: bodyBackgroundColor,
-          //                 side: MaterialStateBorderSide.resolveWith(
-          //                   (Set<MaterialState> states) {
-          //                     if (states.contains(MaterialState.selected)) {
-          //                       return const BorderSide(
-          //                           color: Color.fromRGBO(239, 239, 239, 1),
-          //                           width: 1.5);
-          //                     }
-          //                     return const BorderSide(
-          //                         color: Color.fromRGBO(239, 239, 239, 1),
-          //                         width: 1.5);
-          //                   },
-          //                 ),
-          //                 shape: const CircleBorder(),
-          //                 value: _minSymbols,
-          //                 onChanged: (value) {
-          //                   setState(() {
-          //                     _minSymbols = value!;
-          //                     if (value) {
-          //                       _minSymbolsCheckBoxTextColor = doneTextColor;
-          //                     } else {
-          //                       _minSymbolsCheckBoxTextColor = textColor;
-          //                     }
-          //                   });
-          //                 },
-          //               ),
-          //             ),
-          //           ),
-          //           Text(
-          //             ' Минимум 8 символов',
-          //             style: TextStyle(
-          //               fontSize: 13,
-          //               color: _minSymbolsCheckBoxTextColor,
-          //             ),
-          //           ),
-          //           const SizedBox(height: 12),
-          //         ],
-          //       ),
-          //       Row(
-          //         children: [
-          //           Padding(
-          //             padding: const EdgeInsets.only(right: 10),
-          //             child: SizedBox(
-          //               height: 20,
-          //               width: 15,
-          //               child: Checkbox(
-          //                 checkColor: doneTextColor,
-          //                 activeColor: bodyBackgroundColor,
-          //                 side: MaterialStateBorderSide.resolveWith(
-          //                   (Set<MaterialState> states) {
-          //                     if (states.contains(MaterialState.selected)) {
-          //                       return const BorderSide(
-          //                           color: Color.fromRGBO(239, 239, 239, 1),
-          //                           width: 1.5);
-          //                     }
-          //                     return const BorderSide(
-          //                         color: Color.fromRGBO(239, 239, 239, 1),
-          //                         width: 1.5);
-          //                   },
-          //                 ),
-          //                 shape: const CircleBorder(),
-          //                 value: _lowerAndUpperCase,
-          //                 onChanged: (value) {
-          //                   setState(() {
-          //                     _lowerAndUpperCase = value!;
-          //                     if (value) {
-          //                       _lowerAndUpperCaseCheckBoxTextColor =
-          //                           doneTextColor;
-          //                     } else {
-          //                       _lowerAndUpperCaseCheckBoxTextColor = textColor;
-          //                     }
-          //                   });
-          //                 },
-          //               ),
-          //             ),
-          //           ),
-          //           Container(
-          //             constraints: const BoxConstraints(maxWidth: 350),
-          //             child: Text(
-          //               'Пароль должен содержать буквы верхнего и нижнего регистра',
-          //               style: TextStyle(
-          //                 fontSize: 13,
-          //                 color: _lowerAndUpperCaseCheckBoxTextColor,
-          //               ),
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //       const SizedBox(height: 12),
-          //       Row(
-          //         children: [
-          //           Padding(
-          //             padding: const EdgeInsets.only(right: 10),
-          //             child: SizedBox(
-          //               height: 20,
-          //               width: 15,
-          //               child: Checkbox(
-          //                 checkColor: doneTextColor,
-          //                 activeColor: bodyBackgroundColor,
-          //                 side: MaterialStateBorderSide.resolveWith(
-          //                   (Set<MaterialState> states) {
-          //                     if (states.contains(MaterialState.selected)) {
-          //                       return const BorderSide(
-          //                           color: Color.fromRGBO(239, 239, 239, 1),
-          //                           width: 1.5);
-          //                     }
-          //                     return const BorderSide(
-          //                         color: Color.fromRGBO(239, 239, 239, 1),
-          //                         width: 1.5);
-          //                   },
-          //                 ),
-          //                 shape: const CircleBorder(),
-          //                 value: _personalInfoInPass,
-          //                 onChanged: (value) {
-          //                   setState(() {
-          //                     _personalInfoInPass = value!;
-          //                     if (value) {
-          //                       _personalInfoTextColor = doneTextColor;
-          //                     } else {
-          //                       _personalInfoTextColor = textColor;
-          //                     }
-          //                   });
-          //                 },
-          //               ),
-          //             ),
-          //           ),
-          //           Container(
-          //             constraints: BoxConstraints(maxWidth: 350),
-          //             child: Text(
-          //               'Не рекомендуется использовать личную информацию(имена, даты рождения, и т.д.) в качестве пароля',
-          //               overflow: TextOverflow.fade,
-          //               style: TextStyle(
-          //                 fontSize: 13,
-          //                 color: _personalInfoTextColor,
-          //               ),
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //     ],
-          //   ),
-          // ),
           const SizedBox(height: 32.0),
           Container(
             width: double.infinity,
@@ -406,9 +234,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       borderRadius: BorderRadius.circular(5),
                     ))),
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    // Процесс регистрации
-                  }
+                  dispose();
+                  // if (_formKey.currentState!.validate()) {
+                  //   // Процесс регистрации
+                  // }
                 },
                 child: Text(
                   'Далее',
