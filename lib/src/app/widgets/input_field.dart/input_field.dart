@@ -32,6 +32,7 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // height: 60,
       decoration: BoxDecoration(
         color: inputBackgroundColor ?? const Color.fromARGB(255, 36, 37, 43),
         borderRadius: const BorderRadius.only(
@@ -68,22 +69,3 @@ class InputField extends StatelessWidget {
     );
   }
 }
-
-
-// (value) {
-//           if (value == null || value.isEmpty) {
-//             return 'Please enter your email';
-//           }
-//           if (!value.contains('@')) {
-//             return 'Please enter a valid email address';
-//           }
-//           return null;
-//         },
-
-
-// (value) {
-//               if (value == null || value.isEmpty) {
-//                 return 'Please enter';
-//               }
-//               return null;
-//             },

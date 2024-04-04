@@ -29,7 +29,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   bool _personalInfoInPassError = false;
   bool _minSymbolsValid = false;
   bool _lowerAndUpperCaseValid = false;
-  bool _personalInfoInPassValid = false;
+  bool _personalInfoInPassValid = true;
+  List<bool> listValidationWidgetBool = [];
 
   @override
   void dispose() {
@@ -38,6 +39,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     super.dispose();
   }
 
+  // void getMinSymbolsState(String value) {
+  //   if (value.length >= 8) {
+  //     setState(() {
+  //       _minSymbolsError = false;
+  //       _minSymbolsValid = true;
+  //     });
+  //   } else {
+  //     setState(() {
+  //       _minSymbolsError = true;
+  //       _minSymbolsValid = false;
+  //     });
+  //   }
+  // }
   // void _checkPassword(String password) {
   //   setState(() {
   //     _minSymbols = password.contains(RegExp(r'[A-Z]'));
@@ -129,6 +143,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
               autoValidate: AutovalidateMode.onUserInteraction,
               validator: (value) {
+                // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                //   if (value!.length <= 8) {
+                //     setState(() {
+                //       _minSymbolsError = true;
+                //       _minSymbolsValid = false;
+                //     });
+                //   }
+                // });
                 if (value == null || value.isEmpty) {
                   return 'Пожалуйста введите пароль';
                 }
@@ -158,10 +180,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
               autoValidate: AutovalidateMode.onUserInteraction,
               validator: (value) {
-                //  TODO Проверка в момент ввода https://codewithandrea.com/articles/flutter-text-field-form-validation/
+                if (value == null || value.isEmpty) {
+                  _passMatch = false;
+                  return 'Пожалуйста подтвердите пароль';
+                }
                 // Проверка пароля на отсутствие значения
                 WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                  if (value!.length >= 8) {
+                  if (value.length >= 8) {
                     setState(() {
                       _minSymbolsError = false;
                       _minSymbolsValid = true;
@@ -173,10 +198,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     });
                   }
                 });
-                if (value == null || value.isEmpty) {
-                  _passMatch = false;
-                  return 'Пожалуйста подтвердите пароль';
-                }
+                WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                  if ((value.contains(RegExp(r'[А-Я]')) ||
+                          value.contains(RegExp(r'[A-Z]'))) &&
+                      (value.contains(RegExp(r'[a-z]')) ||
+                          value.contains(RegExp(r'[а-я]')))) {
+                    setState(() {
+                      _lowerAndUpperCaseError = false;
+                      _lowerAndUpperCaseValid = true;
+                    });
+                  } else {
+                    setState(() {
+                      _lowerAndUpperCaseError = true;
+                      _lowerAndUpperCaseValid = false;
+                    });
+                  }
+                });
+
                 // Проверка пароля на соответствие паролей
                 if (value != _passwordController.text) {
                   _passMatch = false;
@@ -186,14 +224,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   _passMatch = true;
                 }
 
-                // Проверка пароля на нужное количество символов
-
                 return null;
               },
             ),
           ),
           // Поля валидации пароля
           ValidationPasswordWidget(
+            isAllValid: _minSymbolsValid &&
+                    _lowerAndUpperCaseValid &&
+                    _personalInfoInPassValid
+                ? true
+                : false,
             minSymbolsCheckBox: DefaultCheckBox(
               isError: _minSymbolsError,
               isValid: _minSymbolsValid,
@@ -214,39 +255,39 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           ),
 
           const SizedBox(height: 32.0),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(
-              vertical: 24,
-              horizontal: 32,
-            ),
-            decoration: const BoxDecoration(
-              border: Border(
-                top: BorderSide(width: 1, color: Color(0xFF24252B)),
-              ),
-            ),
-            child: SizedBox(
-              height: 72,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(buttonNextColor),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ))),
-                onPressed: () {
-                  dispose();
-                  // if (_formKey.currentState!.validate()) {
-                  //   // Процесс регистрации
-                  // }
-                },
-                child: Text(
-                  'Далее',
-                  style: TextStyle(color: buttonNextColorText),
-                ),
-              ),
+        ],
+      ),
+      bottomNavigationBar: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(
+          vertical: 24,
+          horizontal: 32,
+        ),
+        decoration: const BoxDecoration(
+          border: Border(
+            top: BorderSide(width: 1, color: Color(0xFF24252B)),
+          ),
+        ),
+        child: SizedBox(
+          height: 72,
+          child: ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(buttonNextColor),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ))),
+            onPressed: () {
+              // dispose();
+              // if (_formKey.currentState!.validate()) {
+              //   // Процесс регистрации
+              // }
+            },
+            child: Text(
+              'Далее',
+              style: TextStyle(color: buttonNextColorText),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
