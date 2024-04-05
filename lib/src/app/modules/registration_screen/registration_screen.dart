@@ -30,8 +30,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   bool _minSymbolsValid = false;
   bool _lowerAndUpperCaseValid = false;
   bool _personalInfoInPassValid = true;
-  List<bool> listValidationWidgetBool = [];
-
+  bool _isAllValid = false;
   @override
   void dispose() {
     _passwordController.dispose();
@@ -39,19 +38,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     super.dispose();
   }
 
-  // void getMinSymbolsState(String value) {
-  //   if (value.length >= 8) {
-  //     setState(() {
-  //       _minSymbolsError = false;
-  //       _minSymbolsValid = true;
-  //     });
-  //   } else {
-  //     setState(() {
-  //       _minSymbolsError = true;
-  //       _minSymbolsValid = false;
-  //     });
-  //   }
-  // }
+  @override
+  void initState() {
+    _isAllValid =
+        _minSymbolsValid && _lowerAndUpperCaseValid && _personalInfoInPassValid;
+    super.initState();
+  }
   // void _checkPassword(String password) {
   //   setState(() {
   //     _minSymbols = password.contains(RegExp(r'[A-Z]'));
@@ -156,6 +148,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 }
                 if (value.length < 8) {
                   return 'Пароль должен быть больше 8 символов';
+                }
+                if (_confirmPasswordController.text.isNotEmpty &&
+                    value != _confirmPasswordController.text) {
+                  _passMatch = false;
+
+                  return 'Пароли не совпадают';
+                } else {
+                  _passMatch = true;
                 }
                 // _checkPassword(value);
                 return null;
@@ -272,16 +272,25 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           height: 72,
           child: ElevatedButton(
             style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(buttonNextColor),
+                backgroundColor: MaterialStateProperty.all(_minSymbolsValid &&
+                        _lowerAndUpperCaseValid &&
+                        _personalInfoInPassValid
+                    ? Colors.pink
+                    : buttonNextColor),
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
                 ))),
-            onPressed: () {
-              // dispose();
-              // if (_formKey.currentState!.validate()) {
-              //   // Процесс регистрации
-              // }
-            },
+            onPressed: _minSymbolsValid &&
+                    _lowerAndUpperCaseValid &&
+                    _personalInfoInPassValid
+                ? () {
+                    print('Кнопка далее нажата');
+                    // dispose();
+                    // if (_formKey.currentState!.validate()) {
+                    //   // Процесс регистрации
+                    // }
+                  }
+                : null,
             child: Text(
               'Далее',
               style: TextStyle(color: buttonNextColorText),
