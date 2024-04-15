@@ -12,6 +12,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => const MaterialApp(
         title: 'Flutter RTK',
-        home: FirtstScreen(),
+        home: FirstScreen(),
       );
 }
