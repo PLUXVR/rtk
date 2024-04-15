@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/widgets/rectangle_button/rectangle_button.dart';
 
+// Дефолтный AppBar с кнопкой назад
+
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? titleText;
   final Widget? title;
@@ -29,7 +31,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
         title: titleText is String
             ? Text(
                 titleText!,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Color.fromRGBO(239, 239, 239, 1),
                   fontSize: 24,
                 ),
@@ -54,20 +56,6 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
           ],
         ),
         actions: actions,
-
-        // title: Row(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        //     SvgPicture.asset('assets/icons/arrow-lef222222222t.svg'),
-        //     const Spacer(),
-        //     Text(
-        //       'Регистрация',
-        //       style: TextStyle(color: textColor),
-        //     ),
-        //     const Spacer(),
-        //     SvgPicture.asset('assets/icons/help-circle.svg'),
-        //   ],
-        // ),
       );
   @override
   Size get preferredSize => const Size.fromHeight(64.0);

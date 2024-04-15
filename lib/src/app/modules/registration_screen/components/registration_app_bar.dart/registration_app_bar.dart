@@ -3,6 +3,8 @@ import 'package:flutter_rtk/src/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flutter_rtk/src/app/widgets/rectangle_button/rectangle_button.dart';
 import 'package:flutter_svg/svg.dart';
 
+// AppBar для экрана регистрации
+
 class RegistrationAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   const RegistrationAppBar({super.key});
@@ -10,6 +12,7 @@ class RegistrationAppBar extends StatelessWidget
   @override
   Widget build(BuildContext context) => DefaultAppBar(
         titleText: "Регистрация",
+        // Кнопки в AppBar (Правый верхний угол)
         actions: [
           DefaultRectangleButton(
             child: SvgPicture.asset('assets/icons/help-circle.svg'),

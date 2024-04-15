@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+// Обычная квадратная кнопка без фона
+
 class DefaultRectangleButton extends StatelessWidget {
   final Widget? child;
   final Color? color;

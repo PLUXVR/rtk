@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+// Поле ввода информации
+
 class InputField extends StatelessWidget {
   final TextEditingController? controller;
   final AutovalidateMode? autoValidate;

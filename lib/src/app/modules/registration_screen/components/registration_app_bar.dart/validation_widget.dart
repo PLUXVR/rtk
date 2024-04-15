@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_rtk/src/app/widgets/check_box/check_box.dart';
 
+// Виджет с чекбоксами для валидации полей ввода информациии о пользователе
+
 class ValidationPasswordWidget extends StatelessWidget {
   final bool isAllValid;
   final DefaultCheckBox minSymbolsCheckBox;
@@ -52,7 +54,6 @@ class ValidationPasswordWidget extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12.0),
-          //TODO Вставить чекбоксы и сделать отдельный виджет для отображения
           minSymbolsCheckBox,
           const SizedBox(height: 12.0),
           lowerAndUpperCaseCheckBox,

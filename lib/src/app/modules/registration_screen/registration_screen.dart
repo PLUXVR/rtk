@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/registration_app_bar.dart';
 import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/registration_body.dart';
@@ -8,6 +6,8 @@ import 'package:flutter_rtk/src/app/modules/registration_screen/components/regis
 import 'package:flutter_rtk/src/app/widgets/check_box/check_box.dart';
 import 'package:flutter_rtk/src/app/widgets/input_field.dart/input_field.dart';
 import 'package:flutter_svg/svg.dart';
+
+// Страница регистрации пользователя
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -30,7 +30,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   bool _minSymbolsValid = false;
   bool _lowerAndUpperCaseValid = false;
   bool _personalInfoInPassValid = true;
-  bool _isAllValid = false;
+  // bool _isAllValid = false;
+
   @override
   void dispose() {
     _passwordController.dispose();
@@ -38,12 +39,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     super.dispose();
   }
 
-  @override
-  void initState() {
-    _isAllValid =
-        _minSymbolsValid && _lowerAndUpperCaseValid && _personalInfoInPassValid;
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   _isAllValid =
+  //       _minSymbolsValid && _lowerAndUpperCaseValid && _personalInfoInPassValid;
+  //   super.initState();
+  // }
   // void _checkPassword(String password) {
   //   setState(() {
   //     _minSymbols = password.contains(RegExp(r'[A-Z]'));
@@ -269,14 +270,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           ),
         ),
         child: SizedBox(
-          height: 72,
+          height: 62,
           child: ElevatedButton(
             style: ButtonStyle(
+                shadowColor: const MaterialStatePropertyAll(Colors.black),
+                elevation: const MaterialStatePropertyAll(5),
                 backgroundColor: MaterialStateProperty.all(_minSymbolsValid &&
                         _lowerAndUpperCaseValid &&
                         _personalInfoInPassValid
-                    ? Colors.pink
-                    : buttonNextColor),
+                    ? buttonNextColorActive
+                    : buttonNextColorBlocked),
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
                 ))),
@@ -293,7 +296,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 : null,
             child: Text(
               'Далее',
-              style: TextStyle(color: buttonNextColorText),
+              style: _minSymbolsValid &&
+                      _lowerAndUpperCaseValid &&
+                      _personalInfoInPassValid
+                  ? TextStyle(color: textColor)
+                  : TextStyle(color: textColorButtonBlocked),
             ),
           ),
         ),

@@ -1,8 +1,8 @@
-// TODO сделать чекбокс отдельным элементом, скорее всего кастомным
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_svg/svg.dart';
+
+// Кастомный чекбокс без возможности нажатия (можно добавить при надобности)
 
 class DefaultCheckBox extends StatelessWidget {
   final bool isError;
@@ -38,7 +38,8 @@ class DefaultCheckBox extends StatelessWidget {
                   color: Colors.transparent,
                   border: Border.all(
                       width: 2.5,
-                      color: isError ? wrongTextColor : Color(0xFFC0BBC9)),
+                      color:
+                          isError ? wrongTextColor : const Color(0xFFC0BBC9)),
                   borderRadius: BorderRadius.circular(Checkbox.width)),
               child: isError
                   ? Padding(
@@ -58,16 +59,20 @@ class DefaultCheckBox extends StatelessWidget {
           width: 8,
         ),
         Flexible(
-          child: Text(
-            checkBoxText ?? "",
-            style: TextStyle(
-              fontSize: 13,
-              color: isError
-                  ? wrongTextColor
-                  : isValid
-                      ? doneTextColor
-                      : checkBoxTextColor,
-            ),
+          child: Column(
+            children: [
+              Text(
+                checkBoxText ?? "",
+                style: TextStyle(
+                  fontSize: 13,
+                  color: isError
+                      ? wrongTextColor
+                      : isValid
+                          ? doneTextColor
+                          : checkBoxTextColor,
+                ),
+              ),
+            ],
           ),
         ),
       ],
