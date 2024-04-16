@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_rtk/src/app/modules/first_screen/components/dd.dart';
 import 'package:flutter_rtk/src/app/modules/first_screen/components/registration_or_login_widget.dart';
 import 'package:flutter_rtk/src/app/modules/first_screen/components/welcome_widget.dart';
 
@@ -27,9 +29,11 @@ class FirstScreen extends StatelessWidget {
             ),
           ),
           const WelcomeWidget(),
+          RegistrationOrLoginWidget(),
+          DivTextDiv(),
         ],
       ),
-      bottomSheet: const RegistrationOrLoginWidget(),
+      bottomNavigationBar: null,
     );
   }
 }
