@@ -29,11 +29,9 @@ class FirstScreen extends StatelessWidget {
             ),
           ),
           const WelcomeWidget(),
-          RegistrationOrLoginWidget(),
-          DivTextDiv(),
+          const RegistrationOrLoginWidget(),
         ],
       ),
-      bottomNavigationBar: null,
     );
   }
 }

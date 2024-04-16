@@ -8,5 +8,6 @@ Color doneTextColor = const Color.fromRGBO(69, 204, 172, 1);
 Color wrongTextColor = const Color(0xFFEBB9B8);
 Color buttonNextColorBlocked = const Color.fromRGBO(165, 168, 173, 0.160);
 Color textColorButtonBlocked = const Color(0xFF858586);
+Color textLogInButton = const Color(0xFF5E636B);
 Color checkBoxTextColor = const Color(0xFFADADAE);
 Color buttonNextColorActive = const Color(0xFF7941F0);
