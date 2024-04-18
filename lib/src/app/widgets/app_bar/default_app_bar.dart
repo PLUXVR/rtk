@@ -33,7 +33,8 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
                 titleText!,
                 style: const TextStyle(
                   color: Color.fromRGBO(239, 239, 239, 1),
-                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
                 ),
               )
             : title,
@@ -42,9 +43,9 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: centerTitle,
         leading: Row(
           children: [
-            const SizedBox(
-              width: 24,
-            ),
+            // const SizedBox(
+            //   width: 24,
+            // ),
             leading ??
                 DefaultRectangleButton(
                     onTap: onLeadingTap ??

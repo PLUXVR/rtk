@@ -16,13 +16,13 @@ class RegistrationOrLoginWidget extends StatelessWidget {
             vertical: 24,
             horizontal: 32,
           ),
-          // decoration: const BoxDecoration(color: Color.fromRGBO(30, 31, 36, 1)),
           decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomLeft,
                 colors: [
-                  Color.fromRGBO(30, 36, 32, 0.1),
+                  Colors.transparent,
+                  Color.fromRGBO(30, 31, 36, 0.1),
                   Color.fromRGBO(30, 31, 36, 1)
                 ]),
           ),
@@ -79,7 +79,7 @@ class RegistrationOrLoginWidget extends StatelessWidget {
           ),
         ),
         Container(
-          decoration: BoxDecoration(color: Color.fromRGBO(30, 31, 36, 1)),
+          decoration: const BoxDecoration(color: Color.fromRGBO(30, 31, 36, 1)),
           height: 20,
         )
       ],

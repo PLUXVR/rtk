@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/modules/first_screen/components/div_text_div_widget.dart.dart';
 import 'package:flutter_rtk/src/app/modules/first_screen/first_screen.dart';
 import 'package:flutter_rtk/src/app/modules/registration_screen/registration_screen.dart';
+import 'package:flutter_rtk/src/app/modules/step_one_phone_number/components/step_app_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,6 +14,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => const MaterialApp(
         title: 'Flutter RTK',
-        home: FirstScreen(),
+        home: StepAppBar(),
       );
 }

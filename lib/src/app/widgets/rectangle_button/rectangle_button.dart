@@ -22,18 +22,21 @@ class DefaultRectangleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => GestureDetector(
         onTap: onTap ?? () {},
-        child: AnimatedContainer(
-          height: height,
-          width: width,
-          duration: const Duration(
-            milliseconds: 150,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 23.0),
+          child: AnimatedContainer(
+            height: height,
+            width: width,
+            duration: const Duration(
+              milliseconds: 150,
+            ),
+            decoration: BoxDecoration(
+              color: color ?? const Color.fromRGBO(36, 38, 45, 1),
+              shape: BoxShape.rectangle,
+            ),
+            alignment: Alignment.bottomRight,
+            child: child ?? SvgPicture.asset('assets/icons/arrow-left.svg'),
           ),
-          decoration: BoxDecoration(
-            color: color ?? const Color.fromRGBO(36, 38, 45, 1),
-            shape: BoxShape.rectangle,
-          ),
-          alignment: Alignment.center,
-          child: child ?? SvgPicture.asset('assets/icons/arrow-left.svg'),
         ),
       );
 }
