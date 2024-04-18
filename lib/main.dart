@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rtk/src/app/modules/first_screen/components/dd.dart';
+import 'package:flutter_rtk/src/app/modules/first_screen/components/div_text_div_widget.dart.dart';
 import 'package:flutter_rtk/src/app/modules/first_screen/first_screen.dart';
 import 'package:flutter_rtk/src/app/modules/registration_screen/registration_screen.dart';
 

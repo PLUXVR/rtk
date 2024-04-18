@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
-import 'package:flutter_rtk/src/app/modules/first_screen/components/dd.dart';
+import 'package:flutter_rtk/src/app/modules/first_screen/components/div_text_div_widget.dart.dart';
 
 class RegistrationOrLoginWidget extends StatelessWidget {
   const RegistrationOrLoginWidget({super.key});
@@ -16,13 +16,16 @@ class RegistrationOrLoginWidget extends StatelessWidget {
             vertical: 24,
             horizontal: 32,
           ),
-          // decoration: const BoxDecoration(
-          //   gradient: LinearGradient(
-          //       begin: Alignment.topLeft,
-          //       end: Alignment.bottomRight,
-          //       colors: [Colors.transparent, Color.fromRGBO(30, 31, 36, 1)]),
-          // ),
-          decoration: BoxDecoration(color: Color.fromRGBO(30, 31, 36, 1)),
+          // decoration: const BoxDecoration(color: Color.fromRGBO(30, 31, 36, 1)),
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Color.fromRGBO(30, 36, 32, 0.1),
+                  Color.fromRGBO(30, 31, 36, 1)
+                ]),
+          ),
           child: SizedBox(
             height: 54,
             child: ElevatedButton(
@@ -58,8 +61,8 @@ class RegistrationOrLoginWidget extends StatelessWidget {
             height: 54,
             child: ElevatedButton(
               style: ButtonStyle(
-                  backgroundColor:
-                      const MaterialStatePropertyAll(Colors.transparent),
+                  backgroundColor: const MaterialStatePropertyAll(
+                      Color.fromRGBO(30, 31, 36, 1)),
                   side: MaterialStateProperty.all<BorderSide>(
                       BorderSide(color: textLogInButton)),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -75,6 +78,10 @@ class RegistrationOrLoginWidget extends StatelessWidget {
             ),
           ),
         ),
+        Container(
+          decoration: BoxDecoration(color: Color.fromRGBO(30, 31, 36, 1)),
+          height: 20,
+        )
       ],
     );
   }
