@@ -43,9 +43,6 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: centerTitle,
         leading: Row(
           children: [
-            // const SizedBox(
-            //   width: 24,
-            // ),
             leading ??
                 DefaultRectangleButton(
                     onTap: onLeadingTap ??
@@ -59,5 +56,5 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
         actions: actions,
       );
   @override
-  Size get preferredSize => const Size.fromHeight(64.0);
+  Size get preferredSize => const Size.fromHeight(54.0);
 }
