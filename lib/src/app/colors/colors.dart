@@ -12,3 +12,8 @@ Color textColorButtonBlocked = const Color(0xFF858586);
 Color textLogInButton = const Color(0xFF5E636B);
 Color checkBoxTextColor = const Color(0xFFADADAE);
 Color buttonNextColorActive = const Color(0xFF7941F0);
+
+abstract final class AppColors {
+  static const white = Colors.white;
+  static const orange300 = Color(0xFFF98760);
+}

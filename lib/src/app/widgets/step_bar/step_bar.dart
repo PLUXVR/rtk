@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rtk/src/app/colors/colors.dart';
 
 class StepBar extends StatelessWidget {
-  const StepBar({super.key});
+  final int currentStep;
+  final int stepsCount;
+
+  const StepBar({
+    super.key,
+    required this.currentStep,
+    required this.stepsCount,
+  }) : assert(currentStep > 0 && currentStep <= stepsCount);
 
   @override
   Widget build(BuildContext context) {
@@ -12,82 +20,43 @@ class StepBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Stack(
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                      color: Color(0xFF34363F),
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
-                  width: 32,
-                  height: 4,
+            for (var i = 1; i <= stepsCount; i++)
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Stack(
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF34363F),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(8),
+                          ),
+                        ),
+                        height: 4,
+                      ),
+                      if (i <= currentStep)
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  color: AppColors.orange300,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(8),
+                                    bottomLeft: Radius.circular(8),
+                                  ),
+                                ),
+                                height: 4,
+                              ),
+                            ),
+                            if (i == currentStep) const Spacer(),
+                          ],
+                        ),
+                    ],
+                  ),
                 ),
-                Container(
-                  decoration: const BoxDecoration(
-                      color: Colors.orange,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(8),
-                          bottomLeft: Radius.circular(8))),
-                  width: 16,
-                  height: 4,
-                ),
-              ],
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Stack(
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                      color: Color(0xFF34363F),
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
-                  width: 32,
-                  height: 4,
-                ),
-              ],
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Stack(
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                      color: Color(0xFF34363F),
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
-                  width: 32,
-                  height: 4,
-                ),
-              ],
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Stack(
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                      color: Color(0xFF34363F),
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
-                  width: 32,
-                  height: 4,
-                ),
-              ],
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Stack(
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                      color: Color(0xFF34363F),
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
-                  width: 32,
-                  height: 4,
-                ),
-              ],
-            ),
+              ),
           ],
         ),
       ),

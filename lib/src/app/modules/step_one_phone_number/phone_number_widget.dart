@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_rtk/src/app/widgets/app_bar/default_app_bar.dart';
@@ -8,19 +10,49 @@ import 'package:flutter_rtk/src/app/widgets/text_info_widget/text_info_widget.da
 import 'package:flutter_svg/svg.dart';
 
 class PhoneNumberScreen extends StatefulWidget {
-  const PhoneNumberScreen({super.key});
+  final int stepsCount;
+  const PhoneNumberScreen({
+    super.key,
+    required this.stepsCount,
+  });
 
   @override
-  _PhoneNumberScreenState createState() => _PhoneNumberScreenState();
+  State<PhoneNumberScreen> createState() => _PhoneNumberScreenState();
 }
 
 class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
+  int _currenStep = 1;
+
+  nextStep() {
+    if (_currenStep < widget.stepsCount) {
+      setState(() {
+        _currenStep++;
+      });
+    }
+  }
+
+  previousStep() {
+    if (_currenStep > 1) {
+      setState(() {
+        _currenStep--;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bodyBackgroundColor,
       appBar: DefaultAppBar(
+        additionHeight: 20,
         titleText: "Шаг 1 из 5",
+        bottomAppBarChild: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 120.0),
+          child: StepBar(
+            currentStep: _currenStep,
+            stepsCount: 5,
+          ),
+        ),
         actions: [
           DefaultRectangleButton(
             child: SvgPicture.asset('assets/icons/x-circle.svg'),
@@ -29,7 +61,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
       ),
       body: Column(
         children: [
-          const StepBar(),
           const TextInfoWidget(),
           Container(
             width: double.infinity,
@@ -94,6 +125,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
               // if (_formKey.currentState!.validate()) {
               //   // Процесс регистрации
               // }
+              previousStep();
             },
             child: Text(
               'Отправить код',

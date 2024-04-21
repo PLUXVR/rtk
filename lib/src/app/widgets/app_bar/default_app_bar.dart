@@ -12,6 +12,8 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget> actions;
   final Widget? icon;
   final bool centerTitle;
+  final double additionHeight;
+  final Widget? bottomAppBarChild;
 
   const DefaultAppBar({
     super.key,
@@ -23,11 +25,19 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions = const [],
     this.icon,
     this.centerTitle = true,
+    this.additionHeight = 0,
+    this.bottomAppBarChild,
   });
 
   @override
   Widget build(BuildContext context) => AppBar(
         titleSpacing: 0,
+        bottom: bottomAppBarChild is Widget
+            ? BottomAppBar(
+                height: additionHeight,
+                child: bottomAppBarChild!,
+              )
+            : null,
         title: titleText is String
             ? Text(
                 titleText!,
@@ -56,5 +66,26 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
         actions: actions,
       );
   @override
-  Size get preferredSize => const Size.fromHeight(54.0);
+  Size get preferredSize => Size.fromHeight(54.0 + additionHeight);
+}
+
+class BottomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final Widget child;
+  final double height;
+  const BottomAppBar({
+    super.key,
+    required this.child,
+    this.height = 0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: height,
+      child: child,
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(height);
 }
