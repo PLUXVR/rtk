@@ -16,4 +16,7 @@ Color buttonNextColorActive = const Color(0xFF7941F0);
 abstract final class AppColors {
   static const white = Colors.white;
   static const orange300 = Color(0xFFF98760);
+  static const neutal50 = Color(0xFFDEE4EC);
+  static const neutal700 = Color(0xFF39414A);
+  static const gray100 = Color(0xFFAEAFB2);
 }

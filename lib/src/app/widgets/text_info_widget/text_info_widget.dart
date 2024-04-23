@@ -3,7 +3,14 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
 
 class TextInfoWidget extends StatelessWidget {
-  const TextInfoWidget({super.key});
+  final String headingText;
+  final Widget bodyText;
+
+  const TextInfoWidget({
+    super.key,
+    this.headingText = "",
+    this.bodyText = const Text(''),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +23,7 @@ class TextInfoWidget extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'Введите номер телефона',
+                  headingText!,
                   textAlign: TextAlign.left,
                   style: TextStyle(
                       color: textColor,
@@ -30,13 +37,7 @@ class TextInfoWidget extends StatelessWidget {
             ),
             Row(
               children: [
-                Expanded(
-                  child: Text(
-                    'Для создания аккаунта необходимо ввести личные данные. Мы обязуемся хранить их в целости и сохранности.',
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(color: textColor, fontSize: 12),
-                  ),
-                ),
+                Expanded(child: bodyText),
               ],
             ),
           ],

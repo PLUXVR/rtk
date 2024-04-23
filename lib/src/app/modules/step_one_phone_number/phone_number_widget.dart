@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_rtk/src/app/widgets/app_bar/default_app_bar.dart';
@@ -10,10 +8,10 @@ import 'package:flutter_rtk/src/app/widgets/text_info_widget/text_info_widget.da
 import 'package:flutter_svg/svg.dart';
 
 class PhoneNumberScreen extends StatefulWidget {
-  final int stepsCount;
+  // final int stepsCount;
   const PhoneNumberScreen({
     super.key,
-    required this.stepsCount,
+    // required this.stepsCount,
   });
 
   @override
@@ -21,23 +19,23 @@ class PhoneNumberScreen extends StatefulWidget {
 }
 
 class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
-  int _currenStep = 1;
+  // int _currenStep = 1;
 
-  nextStep() {
-    if (_currenStep < widget.stepsCount) {
-      setState(() {
-        _currenStep++;
-      });
-    }
-  }
+  // nextStep() {
+  //   if (_currenStep < widget.stepsCount) {
+  //     setState(() {
+  //       _currenStep++;
+  //     });
+  //   }
+  // }
 
-  previousStep() {
-    if (_currenStep > 1) {
-      setState(() {
-        _currenStep--;
-      });
-    }
-  }
+  // previousStep() {
+  //   if (_currenStep > 1) {
+  //     setState(() {
+  //       _currenStep--;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +44,10 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
       appBar: DefaultAppBar(
         additionHeight: 20,
         titleText: "Шаг 1 из 5",
-        bottomAppBarChild: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 120.0),
+        bottomAppBarChild: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 120.0),
           child: StepBar(
-            currentStep: _currenStep,
+            currentStep: 1,
             stepsCount: 5,
           ),
         ),
@@ -61,7 +59,11 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
       ),
       body: Column(
         children: [
-          const TextInfoWidget(),
+          const TextInfoWidget(
+            headingText: 'Введите номер телефона',
+            // bodyText:
+            //     'Для создания аккаунта необходимо ввести личные данные. Мы обязуемся хранить их в целости и сохранности.',
+          ),
           Container(
             width: double.infinity,
             decoration: const BoxDecoration(
@@ -125,7 +127,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
               // if (_formKey.currentState!.validate()) {
               //   // Процесс регистрации
               // }
-              previousStep();
+              // previousStep();
             },
             child: Text(
               'Отправить код',
