@@ -23,7 +23,7 @@ class TextInfoWidget extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  headingText!,
+                  headingText,
                   textAlign: TextAlign.left,
                   style: TextStyle(
                       color: textColor,

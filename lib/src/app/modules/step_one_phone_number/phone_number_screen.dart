@@ -61,8 +61,11 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
         children: [
           const TextInfoWidget(
             headingText: 'Введите номер телефона',
-            // bodyText:
-            //     'Для создания аккаунта необходимо ввести личные данные. Мы обязуемся хранить их в целости и сохранности.',
+            bodyText: Text(
+              'Для создания аккаунта необходимо ввести личные данные. Мы обязуемся хранить их в целости и сохранности.',
+              style:
+                  TextStyle(color: AppColors.white, fontSize: 12, height: 1.5),
+            ),
           ),
           Container(
             width: double.infinity,

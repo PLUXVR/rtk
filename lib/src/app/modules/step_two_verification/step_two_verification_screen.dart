@@ -6,18 +6,18 @@ import 'package:flutter_rtk/src/app/widgets/step_bar/step_bar.dart';
 import 'package:flutter_rtk/src/app/widgets/text_info_widget/text_info_widget.dart';
 import 'package:flutter_svg/svg.dart';
 
-class VerificationWidget extends StatefulWidget {
+class VerificationScreen extends StatefulWidget {
   // final int stepsCount;
-  const VerificationWidget({
+  const VerificationScreen({
     super.key,
     // required this.stepsCount,
   });
 
   @override
-  State<VerificationWidget> createState() => _VerificationWidgetState();
+  State<VerificationScreen> createState() => _VerificationScreenState();
 }
 
-class _VerificationWidgetState extends State<VerificationWidget> {
+class _VerificationScreenState extends State<VerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,7 +126,7 @@ class _VerificationWidgetState extends State<VerificationWidget> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
                 Align(

@@ -34,7 +34,7 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: 60,
+      // height: 54,
       decoration: BoxDecoration(
         color: inputBackgroundColor ?? const Color.fromARGB(255, 36, 37, 43),
         borderRadius: const BorderRadius.only(

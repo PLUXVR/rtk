@@ -27,20 +27,20 @@ class ValidationPasswordWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Align(
-            alignment: Alignment.topRight,
-            child: Container(
-              child: isAllValid
-                  ? Text(
-                      'надежный',
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: doneTextColor,
-                      ),
-                    )
-                  : null,
-            ),
-          ),
+          // Align(
+          //   alignment: Alignment.topRight,
+          //   child: Container(
+          //     child: isAllValid
+          //         ? Text(
+          //             'надежный',
+          //             style: TextStyle(
+          //               fontSize: 13,
+          //               color: doneTextColor,
+          //             ),
+          //           )
+          //         : null,
+          //   ),
+          // ),
           const Row(
             children: [
               SizedBox(height: 16.0),

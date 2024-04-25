@@ -35,18 +35,17 @@ class DefaultCheckBox extends StatelessWidget {
               duration: const Duration(milliseconds: 500),
               curve: Curves.fastLinearToSlowEaseIn,
               decoration: BoxDecoration(
-                  color: Colors.transparent,
+                  color: isError ? AppColors.red500 : AppColors.green700,
                   border: Border.all(
                       width: 2.5,
-                      color:
-                          isError ? wrongTextColor : const Color(0xFFC0BBC9)),
+                      color: isError ? AppColors.red500 : AppColors.green700),
                   borderRadius: BorderRadius.circular(Checkbox.width)),
               child: isError
                   ? Padding(
                       padding: const EdgeInsets.all(5),
-                      child: SvgPicture.asset(
-                        'assets/icons/wrong.svg',
-                      ),
+                      child: SvgPicture.asset('assets/icons/alert-cross.svg',
+                          colorFilter: ColorFilter.mode(
+                              bodyBackgroundColor, BlendMode.srcIn)),
                     )
                   : isValid
                       ? Padding(
@@ -63,13 +62,9 @@ class DefaultCheckBox extends StatelessWidget {
             children: [
               Text(
                 checkBoxText ?? "",
-                style: TextStyle(
-                  fontSize: 13,
-                  color: isError
-                      ? wrongTextColor
-                      : isValid
-                          ? doneTextColor
-                          : checkBoxTextColor,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: AppColors.white,
                 ),
               ),
             ],
