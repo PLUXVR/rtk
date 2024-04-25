@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
-import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/validation_widget.dart';
+import 'package:flutter_rtk/src/app/modules/registration_module/registration_screen/components/registration_app_bar.dart/validation_widget.dart';
 import 'package:flutter_rtk/src/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flutter_rtk/src/app/widgets/check_box/check_box.dart';
 import 'package:flutter_rtk/src/app/widgets/input_field.dart/input_field.dart';
@@ -9,14 +9,14 @@ import 'package:flutter_rtk/src/app/widgets/step_bar/step_bar.dart';
 import 'package:flutter_rtk/src/app/widgets/text_info_widget/text_info_widget.dart';
 import 'package:flutter_svg/svg.dart';
 
-class PasswordCreateScreen extends StatefulWidget {
-  const PasswordCreateScreen({super.key});
+class PersonalDataScreen extends StatefulWidget {
+  const PersonalDataScreen({super.key});
 
   @override
-  State<PasswordCreateScreen> createState() => _PasswordCreateScreenState();
+  State<PersonalDataScreen> createState() => _PersonalDataScreenState();
 }
 
-class _PasswordCreateScreenState extends State<PasswordCreateScreen> {
+class _PersonalDataScreenState extends State<PersonalDataScreen> {
   final _formKey = GlobalKey<FormState>();
   // Для сохранения значения поля ввода паролей
   final _passwordController = TextEditingController();
@@ -24,9 +24,9 @@ class _PasswordCreateScreenState extends State<PasswordCreateScreen> {
   // Проверка на соответствие паролей
   bool _passMatch = true;
   // Чек боксы для надежности пароля
-  bool _minSymbolsError = false;
-  bool _lowerAndUpperCaseError = false;
-  bool _personalInfoInPassError = false;
+  bool _minSymbolsError = true;
+  bool _lowerAndUpperCaseError = true;
+  bool _personalInfoInPassError = true;
   bool _minSymbolsValid = false;
   bool _lowerAndUpperCaseValid = false;
   bool _personalInfoInPassValid = false;
@@ -37,11 +37,11 @@ class _PasswordCreateScreenState extends State<PasswordCreateScreen> {
       backgroundColor: bodyBackgroundColor,
       appBar: DefaultAppBar(
         additionHeight: 20,
-        titleText: "Шаг 3 из 5",
+        titleText: "Шаг 4 из 5",
         bottomAppBarChild: const Padding(
           padding: EdgeInsets.symmetric(horizontal: 120.0),
           child: StepBar(
-            currentStep: 3,
+            currentStep: 4,
             stepsCount: 5,
           ),
         ),
@@ -54,9 +54,9 @@ class _PasswordCreateScreenState extends State<PasswordCreateScreen> {
       body: Column(
         children: [
           const TextInfoWidget(
-            headingText: "Создайте пароль",
+            headingText: "Заполните свои личные данные",
             bodyText: Text(
-              'Длина вашего пароля должна составлять не менее 8 символов содержать буквы верхнего и нижнего регистра',
+              'Поделитесь более подробной информацией о себе, чтобы мы могли адаптировать ваш опыт.',
               // textAlign: MainAxisAlignment(),
               style:
                   TextStyle(color: AppColors.white, fontSize: 12, height: 1.5),
@@ -244,6 +244,58 @@ class _PasswordCreateScreenState extends State<PasswordCreateScreen> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: Container(
+        width: double.infinity,
+        padding:
+            const EdgeInsets.only(top: 20, bottom: 35, left: 32, right: 32),
+        decoration: const BoxDecoration(
+          color: Color(0xFF1F2026),
+          border: Border(
+            top: BorderSide(width: 1, color: Color(0xFF24252B)),
+          ),
+        ),
+        child: SizedBox(
+          height: 54,
+          child: ElevatedButton(
+            style: ButtonStyle(
+                shadowColor: const MaterialStatePropertyAll(Colors.black),
+                elevation: const MaterialStatePropertyAll(5),
+                backgroundColor: _minSymbolsValid &&
+                        _lowerAndUpperCaseValid &&
+                        _personalInfoInPassValid &&
+                        _passMatch
+                    ? MaterialStateProperty.all(buttonNextColorActive)
+                    : MaterialStateProperty.all(AppColors.purple800),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ))),
+            onPressed: _minSymbolsValid &&
+                    _lowerAndUpperCaseValid &&
+                    _personalInfoInPassValid &&
+                    _passMatch
+                ? () {
+                    print('Кнопка далее нажата');
+                    // dispose();
+                    // if (_formKey.currentState!.validate()) {
+                    //   // Процесс регистрации
+                    // }
+                    // previousStep();
+                  }
+                : null,
+            child: Text(
+              'Создать пароль',
+              style: TextStyle(
+                  color: _minSymbolsValid &&
+                          _lowerAndUpperCaseValid &&
+                          _personalInfoInPassValid &&
+                          _passMatch
+                      ? textColor
+                      : AppColors.disabledTextColor,
+                  fontWeight: FontWeight.w700),
+            ),
+          ),
+        ),
       ),
     );
   }

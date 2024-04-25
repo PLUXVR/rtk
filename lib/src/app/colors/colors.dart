@@ -15,10 +15,12 @@ Color buttonNextColorActive = const Color(0xFF7941F0);
 
 abstract final class AppColors {
   static const white = Colors.white;
+  static const disabledTextColor = Color(0xFF5B6774);
   static const orange300 = Color(0xFFF98760);
   static const neutal50 = Color(0xFFDEE4EC);
   static const neutal700 = Color(0xFF39414A);
   static const gray100 = Color(0xFFAEAFB2);
   static const green700 = Color(0xFF3EB89B);
   static const red500 = Color(0xFFFA586C);
+  static const purple800 = Color(0xFF492890);
 }

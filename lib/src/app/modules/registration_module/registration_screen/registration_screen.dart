@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
-import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/registration_app_bar.dart';
-import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/registration_body.dart';
-import 'package:flutter_rtk/src/app/modules/registration_screen/components/registration_app_bar.dart/validation_widget.dart';
+import 'package:flutter_rtk/src/app/modules/registration_module/registration_screen/components/registration_app_bar.dart/registration_app_bar.dart';
+import 'package:flutter_rtk/src/app/modules/registration_module/registration_screen/components/registration_app_bar.dart/registration_body.dart';
+import 'package:flutter_rtk/src/app/modules/registration_module/registration_screen/components/registration_app_bar.dart/validation_widget.dart';
 import 'package:flutter_rtk/src/app/widgets/check_box/check_box.dart';
 import 'package:flutter_rtk/src/app/widgets/input_field.dart/input_field.dart';
 import 'package:flutter_svg/svg.dart';
