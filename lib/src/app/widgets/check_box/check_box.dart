@@ -43,9 +43,11 @@ class DefaultCheckBox extends StatelessWidget {
               child: isError
                   ? Padding(
                       padding: const EdgeInsets.all(5),
-                      child: SvgPicture.asset('assets/icons/alert-cross.svg',
-                          colorFilter: ColorFilter.mode(
-                              bodyBackgroundColor, BlendMode.srcIn)),
+                      child: SvgPicture.asset(
+                        'assets/icons/alert-cross.svg',
+                        colorFilter: ColorFilter.mode(
+                            bodyBackgroundColor, BlendMode.srcIn),
+                      ),
                     )
                   : isValid
                       ? Padding(

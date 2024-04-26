@@ -31,11 +31,16 @@ class DefaultRectangleButton extends StatelessWidget {
               milliseconds: 150,
             ),
             decoration: BoxDecoration(
-              color: color ?? const Color.fromRGBO(36, 38, 45, 1),
+              color: color ?? Colors.transparent,
               shape: BoxShape.rectangle,
             ),
             alignment: Alignment.bottomRight,
-            child: child ?? SvgPicture.asset('assets/icons/arrow-left.svg'),
+            child: child ??
+                SvgPicture.asset(
+                  'assets/icons/x-circle.svg',
+                  colorFilter: const ColorFilter.mode(
+                      Colors.transparent, BlendMode.srcIn),
+                ),
           ),
         ),
       );

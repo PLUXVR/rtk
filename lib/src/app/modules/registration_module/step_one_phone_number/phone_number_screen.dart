@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_rtk/src/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flutter_rtk/src/app/widgets/input_field.dart/input_field.dart';
@@ -19,6 +20,7 @@ class PhoneNumberScreen extends StatefulWidget {
 }
 
 class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
+  Key _formKey = GlobalKey();
   // int _currenStep = 1;
 
   // nextStep() {
@@ -53,11 +55,14 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
         ),
         actions: [
           DefaultRectangleButton(
+            onTap: () {
+              Navigator.of(context).maybePop();
+            },
             child: SvgPicture.asset('assets/icons/x-circle.svg'),
           )
         ],
       ),
-      body: Column(
+      body: ListView(
         children: [
           const TextInfoWidget(
             headingText: 'Введите номер телефона',
@@ -118,7 +123,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
           child: ElevatedButton(
             style: ButtonStyle(
                 shadowColor: const MaterialStatePropertyAll(Colors.black),
-                elevation: const MaterialStatePropertyAll(5),
+                elevation: const MaterialStatePropertyAll(2),
                 backgroundColor:
                     MaterialStateProperty.all(buttonNextColorActive),
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -131,6 +136,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
               //   // Процесс регистрации
               // }
               // previousStep();
+              Navigator.of(context).pushNamed('/verificationScreen');
             },
             child: Text(
               'Отправить код',

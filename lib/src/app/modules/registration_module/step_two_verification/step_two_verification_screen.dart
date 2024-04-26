@@ -32,13 +32,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
             stepsCount: 5,
           ),
         ),
-        actions: [
-          DefaultRectangleButton(
-            child: SvgPicture.asset('assets/icons/x-circle.svg'),
-          )
-        ],
+        leading: DefaultRectangleButton(
+          onTap: () {
+            Navigator.of(context).maybePop();
+          },
+          child: SvgPicture.asset('assets/icons/arrow-left.svg'),
+        ),
       ),
-      body: Column(
+      body: ListView(
         children: [
           TextInfoWidget(
             headingText: "Подтвердите номер телефона",
@@ -107,20 +108,31 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 11),
-                        child: Row(
-                          children: [
-                            SvgPicture.asset('assets/icons/refresh-cw.svg'),
-                            const SizedBox(
-                              width: 6,
+                        child: AnimatedContainer(
+                          duration: const Duration(
+                            milliseconds: 150,
+                          ),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushNamed('/passwordCreateScreen');
+                            },
+                            child: Row(
+                              children: [
+                                SvgPicture.asset('assets/icons/refresh-cw.svg'),
+                                const SizedBox(
+                                  width: 6,
+                                ),
+                                const Expanded(
+                                  child: Text(
+                                    'Не получил код',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 9),
+                                  ),
+                                ),
+                              ],
                             ),
-                            const Expanded(
-                              child: Text(
-                                'Не получил код',
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 9),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
                     ),

@@ -31,14 +31,15 @@ class RegistrationOrLoginWidget extends StatelessWidget {
             child: ElevatedButton(
               style: ButtonStyle(
                   shadowColor: const MaterialStatePropertyAll(Colors.black),
-                  elevation: const MaterialStatePropertyAll(5),
+                  elevation: const MaterialStatePropertyAll(2),
                   backgroundColor:
                       MaterialStatePropertyAll(buttonNextColorActive),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
                   ))),
               onPressed: () {
-                print('Кнопка далее нажата');
+                print('Кнопка регистрации нажата');
+                Navigator.of(context).pushNamed('/phoneNumberScreen');
               },
               child: Text(
                 'Регистрация',
@@ -62,14 +63,15 @@ class RegistrationOrLoginWidget extends StatelessWidget {
             child: ElevatedButton(
               style: ButtonStyle(
                   backgroundColor: const MaterialStatePropertyAll(
-                      Color.fromRGBO(30, 31, 36, 1)),
+                    Color.fromRGBO(30, 31, 36, 1),
+                  ),
                   side: MaterialStateProperty.all<BorderSide>(
                       BorderSide(color: textLogInButton)),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
                   ))),
               onPressed: () {
-                print('Кнопка далее нажата');
+                print('Кнопка входа нажата');
               },
               child: Text(
                 'Войти',

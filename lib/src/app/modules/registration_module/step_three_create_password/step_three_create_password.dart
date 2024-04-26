@@ -45,13 +45,14 @@ class _PasswordCreateScreenState extends State<PasswordCreateScreen> {
             stepsCount: 5,
           ),
         ),
-        actions: [
-          DefaultRectangleButton(
-            child: SvgPicture.asset('assets/icons/x-circle.svg'),
-          ),
-        ],
+        leading: DefaultRectangleButton(
+          onTap: () {
+            Navigator.of(context).maybePop();
+          },
+          child: SvgPicture.asset('assets/icons/arrow-left.svg'),
+        ),
       ),
-      body: Column(
+      body: ListView(
         children: [
           const TextInfoWidget(
             headingText: "Создайте пароль",
@@ -281,6 +282,7 @@ class _PasswordCreateScreenState extends State<PasswordCreateScreen> {
                     //   // Процесс регистрации
                     // }
                     // previousStep();
+                    Navigator.of(context).pushNamed('/personalDataScreen');
                   }
                 : null,
             child: Text(

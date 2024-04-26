@@ -9,13 +9,15 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) => const MaterialApp(
+  Widget build(BuildContext context) => MaterialApp(
         title: 'Flutter RTK',
-        // home: FirstScreen(),
-        // home: PhoneNumberScreen(),
-        // home: VerificationScreen(),
-        // home: PasswordCreateScreen(),
-        home: PersonalDataScreen(),
+        routes: {
+          '/': (context) => const FirstScreen(),
+          '/phoneNumberScreen': (context) => const PhoneNumberScreen(),
+          '/verificationScreen': (context) => const VerificationScreen(),
+          '/passwordCreateScreen': (context) => const PasswordCreateScreen(),
+          '/personalDataScreen': (context) => const PersonalDataScreen(),
+        },
         // home: RegistrationScreen(),
       );
 }

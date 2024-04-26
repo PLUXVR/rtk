@@ -47,6 +47,9 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
         ),
         actions: [
           DefaultRectangleButton(
+            onTap: () {
+              Navigator.of(context).maybePop();
+            },
             child: SvgPicture.asset('assets/icons/x-circle.svg'),
           ),
         ],
