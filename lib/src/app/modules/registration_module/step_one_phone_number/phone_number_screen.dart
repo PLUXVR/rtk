@@ -20,7 +20,8 @@ class PhoneNumberScreen extends StatefulWidget {
 }
 
 class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
-  Key _formKey = GlobalKey();
+  final _formKey = GlobalKey<FormState>();
+  bool _filledPhoneNumber = false;
   // int _currenStep = 1;
 
   // nextStep() {
@@ -98,9 +99,22 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                 ),
                 autoValidate: AutovalidateMode.onUserInteraction,
                 validator: (value) {
+                  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                    if (value == null && value!.isEmpty && value == '') {
+                      setState(() {
+                        _filledPhoneNumber = false;
+                      });
+                    } else {
+                      setState(() {
+                        _filledPhoneNumber = true;
+                      });
+                    }
+                  });
+
                   if (value == null || value.isEmpty) {
                     return 'Пожалуйста введите номер телефона';
-                  }
+                  } else {}
+
                   return null;
                 },
               ),
@@ -124,23 +138,30 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
             style: ButtonStyle(
                 shadowColor: const MaterialStatePropertyAll(Colors.black),
                 elevation: const MaterialStatePropertyAll(2),
-                backgroundColor:
-                    MaterialStateProperty.all(buttonNextColorActive),
+                backgroundColor: _filledPhoneNumber
+                    ? MaterialStateProperty.all(buttonNextColorActive)
+                    : MaterialStateProperty.all(AppColors.purple800),
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ))),
-            onPressed: () {
-              print('Кнопка далее нажата');
-              // dispose();
-              // if (_formKey.currentState!.validate()) {
-              //   // Процесс регистрации
-              // }
-              // previousStep();
-              Navigator.of(context).pushNamed('/verificationScreen');
-            },
+            onPressed: _filledPhoneNumber
+                ? () {
+                    print('Кнопка далее нажата');
+                    // dispose();
+                    // if (_formKey.currentState!.validate()) {
+                    //   // Процесс регистрации
+                    // }
+                    // previousStep();
+                    Navigator.of(context).pushNamed('/verificationScreen');
+                  }
+                : null,
             child: Text(
               'Отправить код',
-              style: TextStyle(color: textColor, fontWeight: FontWeight.w700),
+              style: TextStyle(
+                  color: _filledPhoneNumber
+                      ? textColor
+                      : AppColors.disabledTextColor,
+                  fontWeight: FontWeight.w700),
             ),
           ),
         ),

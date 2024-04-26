@@ -52,7 +52,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                           'Мы только что отправили 6-значный код \nна ваш почтовый адрес '),
                   WidgetSpan(
                     child: SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                   ),
                   TextSpan(
