@@ -7,9 +7,11 @@ import 'package:flutter_rtk/src/app/widgets/text_info_widget/text_info_widget.da
 import 'package:flutter_svg/svg.dart';
 
 class VerificationScreen extends StatefulWidget {
+  final String phoneNumber;
   // final int stepsCount;
   const VerificationScreen({
     super.key,
+    required this.phoneNumber,
     // required this.stepsCount,
   });
 
@@ -44,19 +46,15 @@ class _VerificationScreenState extends State<VerificationScreen> {
           TextInfoWidget(
             headingText: "Подтвердите номер телефона",
             bodyText: RichText(
-              text: const TextSpan(
-                style: TextStyle(fontSize: 12, color: Colors.white),
+              text: TextSpan(
+                style:
+                    TextStyle(fontSize: 12, color: Colors.white, height: 1.5),
                 children: [
                   TextSpan(
                       text:
-                          'Мы только что отправили 6-значный код \nна ваш почтовый адрес '),
-                  WidgetSpan(
-                    child: SizedBox(
-                      height: 15,
-                    ),
-                  ),
+                          'Мы только что отправили 6-значный код \nна ваш номер телефона '),
                   TextSpan(
-                      text: '+7 (999) 999 99 99',
+                      text: widget.phoneNumber,
                       style: TextStyle(color: AppColors.orange300)),
                   TextSpan(text: ':'),
                 ],

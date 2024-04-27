@@ -53,14 +53,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: centerTitle,
         leading: Row(
           children: [
-            leading ??
-                DefaultRectangleButton(
-                    onTap: onLeadingTap ??
-                        () {
-                          print('Exit Button');
-                        }
-                    // Navigator.of(context).maybePop,
-                    ),
+            leading ?? DefaultRectangleButton(onTap: onLeadingTap),
           ],
         ),
         actions: actions,

@@ -26,10 +26,10 @@ class _PasswordCreateScreenState extends State<PasswordCreateScreen> {
   // Чек боксы для надежности пароля
   bool _minSymbolsError = true;
   bool _lowerAndUpperCaseError = true;
-  bool _personalInfoInPassError = true;
+  bool _isOneNumOnPasswordError = true;
   bool _minSymbolsValid = false;
   bool _lowerAndUpperCaseValid = false;
-  bool _personalInfoInPassValid = false;
+  bool _isOneNumOnPasswordValid = false;
 
   @override
   Widget build(BuildContext context) {
@@ -158,13 +158,13 @@ class _PasswordCreateScreenState extends State<PasswordCreateScreen> {
                             .addPostFrameCallback((timeStamp) {
                           if (value.contains(RegExp(r'[0-9]'))) {
                             setState(() {
-                              _personalInfoInPassError = false;
-                              _personalInfoInPassValid = true;
+                              _isOneNumOnPasswordError = false;
+                              _isOneNumOnPasswordValid = true;
                             });
                           } else {
                             setState(() {
-                              _personalInfoInPassError = true;
-                              _personalInfoInPassValid = false;
+                              _isOneNumOnPasswordError = true;
+                              _isOneNumOnPasswordValid = false;
                             });
                           }
                         });
@@ -225,7 +225,7 @@ class _PasswordCreateScreenState extends State<PasswordCreateScreen> {
           ValidationPasswordWidget(
             isAllValid: _minSymbolsValid &&
                     _lowerAndUpperCaseValid &&
-                    _personalInfoInPassValid
+                    _isOneNumOnPasswordValid
                 ? true
                 : false,
             minSymbolsCheckBox: DefaultCheckBox(
@@ -239,8 +239,8 @@ class _PasswordCreateScreenState extends State<PasswordCreateScreen> {
               checkBoxText: 'Сочетание символов верхнего и нижнего регистра',
             ),
             personalInfoInPassCheckBox: DefaultCheckBox(
-              isError: _personalInfoInPassError,
-              isValid: _personalInfoInPassValid,
+              isError: _isOneNumOnPasswordError,
+              isValid: _isOneNumOnPasswordValid,
               checkBoxText: 'По крайней мере, одно число',
             ),
           ),
@@ -261,10 +261,10 @@ class _PasswordCreateScreenState extends State<PasswordCreateScreen> {
           child: ElevatedButton(
             style: ButtonStyle(
                 shadowColor: const MaterialStatePropertyAll(Colors.black),
-                elevation: const MaterialStatePropertyAll(5),
+                elevation: const MaterialStatePropertyAll(2),
                 backgroundColor: _minSymbolsValid &&
                         _lowerAndUpperCaseValid &&
-                        _personalInfoInPassValid &&
+                        _isOneNumOnPasswordValid &&
                         _passMatch
                     ? MaterialStateProperty.all(buttonNextColorActive)
                     : MaterialStateProperty.all(AppColors.purple800),
@@ -273,10 +273,10 @@ class _PasswordCreateScreenState extends State<PasswordCreateScreen> {
                 ))),
             onPressed: _minSymbolsValid &&
                     _lowerAndUpperCaseValid &&
-                    _personalInfoInPassValid &&
+                    _isOneNumOnPasswordValid &&
                     _passMatch
                 ? () {
-                    print('Кнопка далее нажата');
+                    print('Кнопка создать пароль нажата');
                     // dispose();
                     // if (_formKey.currentState!.validate()) {
                     //   // Процесс регистрации
@@ -290,7 +290,7 @@ class _PasswordCreateScreenState extends State<PasswordCreateScreen> {
               style: TextStyle(
                   color: _minSymbolsValid &&
                           _lowerAndUpperCaseValid &&
-                          _personalInfoInPassValid &&
+                          _isOneNumOnPasswordValid &&
                           _passMatch
                       ? textColor
                       : AppColors.disabledTextColor,

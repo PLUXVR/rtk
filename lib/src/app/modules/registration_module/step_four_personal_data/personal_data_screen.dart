@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
-import 'package:flutter_rtk/src/app/modules/registration_module/registration_screen/components/registration_app_bar.dart/validation_widget.dart';
 import 'package:flutter_rtk/src/app/widgets/app_bar/default_app_bar.dart';
-import 'package:flutter_rtk/src/app/widgets/check_box/check_box.dart';
 import 'package:flutter_rtk/src/app/widgets/input_field.dart/input_field.dart';
 import 'package:flutter_rtk/src/app/widgets/rectangle_button/rectangle_button.dart';
 import 'package:flutter_rtk/src/app/widgets/step_bar/step_bar.dart';
@@ -18,18 +16,7 @@ class PersonalDataScreen extends StatefulWidget {
 
 class _PersonalDataScreenState extends State<PersonalDataScreen> {
   final _formKey = GlobalKey<FormState>();
-  // Для сохранения значения поля ввода паролей
-  final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
   // Проверка на соответствие паролей
-  bool _passMatch = true;
-  // Чек боксы для надежности пароля
-  bool _minSymbolsError = true;
-  bool _lowerAndUpperCaseError = true;
-  bool _personalInfoInPassError = true;
-  bool _minSymbolsValid = false;
-  bool _lowerAndUpperCaseValid = false;
-  bool _personalInfoInPassValid = false;
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +32,14 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
             stepsCount: 5,
           ),
         ),
-        actions: [
-          DefaultRectangleButton(
-            onTap: () {
-              Navigator.of(context).maybePop();
-            },
-            child: SvgPicture.asset('assets/icons/x-circle.svg'),
-          ),
-        ],
+        leading: DefaultRectangleButton(
+          onTap: () {
+            Navigator.of(context).maybePop();
+          },
+          child: SvgPicture.asset('assets/icons/arrow-left.svg'),
+        ),
       ),
-      body: Column(
+      body: ListView(
         children: [
           const TextInfoWidget(
             headingText: "Заполните свои личные данные",
@@ -86,47 +71,17 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                 child: Column(
                   children: [
                     InputField(
-                      controller: _passwordController,
-                      labelText: 'Пароль',
-                      obcureText: true,
+                      labelText: 'Имя',
                       icon: SvgPicture.asset(
-                        'assets/icons/lock.svg',
+                        'assets/icons/user.svg',
                         width: 32,
                         height: 32,
                       ),
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: _passMatch
-                            ? null
-                            : SvgPicture.asset(
-                                'assets/icons/alert-circle.svg',
-                              ),
-                      ),
                       autoValidate: AutovalidateMode.onUserInteraction,
                       validator: (value) {
-                        // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                        //   if (value!.length <= 8) {
-                        //     setState(() {
-                        //       _minSymbolsError = true;
-                        //       _minSymbolsValid = false;
-                        //     });
-                        //   }
-                        // });
                         if (value == null || value.isEmpty) {
-                          return 'Пожалуйста введите пароль';
+                          return 'Пожалуйста введите имя';
                         }
-                        if (value.length < 8) {
-                          return 'Пароль должен быть больше 8 символов';
-                        }
-                        if (_confirmPasswordController.text.isNotEmpty &&
-                            value != _confirmPasswordController.text) {
-                          _passMatch = false;
-
-                          return 'Пароли не совпадают';
-                        } else {
-                          _passMatch = true;
-                        }
-                        // _checkPassword(value);
                         return null;
                       },
                     ),
@@ -134,84 +89,39 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                       height: 16,
                     ),
                     InputField(
-                      controller: _confirmPasswordController,
-                      labelText: 'Повторите пароль',
-                      obcureText: true,
+                      labelText: 'Фамилия',
                       icon: SvgPicture.asset(
-                        'assets/icons/lock.svg',
+                        'assets/icons/user.svg',
                         width: 32,
                         height: 32,
-                      ),
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: _passMatch
-                            ? null
-                            : SvgPicture.asset(
-                                'assets/icons/alert-circle.svg',
-                              ),
                       ),
                       autoValidate: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          _passMatch = false;
-                          return 'Пожалуйста подтвердите пароль';
+                          return 'Пожалуйста введите фамилию';
                         }
-                        WidgetsBinding.instance
-                            .addPostFrameCallback((timeStamp) {
-                          if (value.contains(RegExp(r'[0-9]'))) {
-                            setState(() {
-                              _personalInfoInPassError = false;
-                              _personalInfoInPassValid = true;
-                            });
-                          } else {
-                            setState(() {
-                              _personalInfoInPassError = true;
-                              _personalInfoInPassValid = false;
-                            });
-                          }
-                        });
-                        // Проверка пароля на отсутствие значения
-                        WidgetsBinding.instance
-                            .addPostFrameCallback((timeStamp) {
-                          if (value.length >= 8) {
-                            setState(() {
-                              _minSymbolsError = false;
-                              _minSymbolsValid = true;
-                            });
-                          } else {
-                            setState(() {
-                              _minSymbolsError = true;
-                              _minSymbolsValid = false;
-                            });
-                          }
-                        });
-                        WidgetsBinding.instance
-                            .addPostFrameCallback((timeStamp) {
-                          if ((value.contains(RegExp(r'[А-Я]')) ||
-                                  value.contains(RegExp(r'[A-Z]'))) &&
-                              (value.contains(RegExp(r'[a-z]')) ||
-                                  value.contains(RegExp(r'[а-я]')))) {
-                            setState(() {
-                              _lowerAndUpperCaseError = false;
-                              _lowerAndUpperCaseValid = true;
-                            });
-                          } else {
-                            setState(() {
-                              _lowerAndUpperCaseError = true;
-                              _lowerAndUpperCaseValid = false;
-                            });
-                          }
-                        });
-
-                        // Проверка пароля на соответствие паролей
-                        if (value != _passwordController.text) {
-                          _passMatch = false;
-
-                          return 'Пароли не совпадают';
-                        } else {
-                          _passMatch = true;
+                        return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    InputField(
+                      labelText: 'Email',
+                      keyboardType: TextInputType.emailAddress,
+                      icon: SvgPicture.asset(
+                        'assets/icons/at-sign.svg',
+                        width: 32,
+                        height: 32,
+                      ),
+                      autoValidate: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Пожалуйста введите email';
                         }
-
+                        if (!value.contains('@')) {
+                          return 'Пожалуйста введите корректный email';
+                        }
                         return null;
                       },
                     ),
@@ -222,29 +132,6 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
           ),
           const SizedBox(
             height: 18,
-          ),
-          //  Поля валидации пароля
-          ValidationPasswordWidget(
-            isAllValid: _minSymbolsValid &&
-                    _lowerAndUpperCaseValid &&
-                    _personalInfoInPassValid
-                ? true
-                : false,
-            minSymbolsCheckBox: DefaultCheckBox(
-              isError: _minSymbolsError,
-              isValid: _minSymbolsValid,
-              checkBoxText: 'Не менее 8 символов',
-            ),
-            lowerAndUpperCaseCheckBox: DefaultCheckBox(
-              isError: _lowerAndUpperCaseError,
-              isValid: _lowerAndUpperCaseValid,
-              checkBoxText: 'Сочетание символов верхнего и нижнего регистра',
-            ),
-            personalInfoInPassCheckBox: DefaultCheckBox(
-              isError: _personalInfoInPassError,
-              isValid: _personalInfoInPassValid,
-              checkBoxText: 'По крайней мере, одно число',
-            ),
           ),
         ],
       ),
@@ -263,39 +150,30 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
           child: ElevatedButton(
             style: ButtonStyle(
                 shadowColor: const MaterialStatePropertyAll(Colors.black),
-                elevation: const MaterialStatePropertyAll(5),
-                backgroundColor: _minSymbolsValid &&
-                        _lowerAndUpperCaseValid &&
-                        _personalInfoInPassValid &&
-                        _passMatch
-                    ? MaterialStateProperty.all(buttonNextColorActive)
-                    : MaterialStateProperty.all(AppColors.purple800),
+                elevation: const MaterialStatePropertyAll(2),
+                backgroundColor:
+                    MaterialStateProperty.all(buttonNextColorActive),
+                // : MaterialStateProperty.all(AppColors.purple800),
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ))),
-            onPressed: _minSymbolsValid &&
-                    _lowerAndUpperCaseValid &&
-                    _personalInfoInPassValid &&
-                    _passMatch
-                ? () {
-                    print('Кнопка далее нажата');
-                    // dispose();
-                    // if (_formKey.currentState!.validate()) {
-                    //   // Процесс регистрации
-                    // }
-                    // previousStep();
-                  }
-                : null,
+            onPressed: () {
+              print('Кнопка создать пароль нажата');
+              // dispose();
+              // if (_formKey.currentState!.validate()) {
+              //   // Процесс регистрации
+              // }
+              // previousStep();
+              Navigator.of(context).pushNamed('/pinCodeScreen');
+            },
+            // : null,
             child: Text(
-              'Создать пароль',
+              'Продолжить',
               style: TextStyle(
-                  color: _minSymbolsValid &&
-                          _lowerAndUpperCaseValid &&
-                          _personalInfoInPassValid &&
-                          _passMatch
-                      ? textColor
-                      : AppColors.disabledTextColor,
-                  fontWeight: FontWeight.w700),
+                color: textColor,
+                //     : AppColors.disabledTextColor,
+                // fontWeight: FontWeight.w700),
+              ),
             ),
           ),
         ),

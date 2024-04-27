@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
+import 'package:flutter_rtk/src/app/modules/registration_module/registration_module_import.dart';
 import 'package:flutter_rtk/src/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flutter_rtk/src/app/widgets/input_field.dart/input_field.dart';
 import 'package:flutter_rtk/src/app/widgets/rectangle_button/rectangle_button.dart';
@@ -21,6 +22,7 @@ class PhoneNumberScreen extends StatefulWidget {
 
 class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _phoneNumberController = TextEditingController();
   bool _filledPhoneNumber = false;
   // int _currenStep = 1;
 
@@ -89,34 +91,38 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
             ),
             child: Padding(
               padding: const EdgeInsets.all(24.0),
-              child: InputField(
-                labelText: 'Номер телефона',
-                keyboardType: TextInputType.phone,
-                icon: SvgPicture.asset(
-                  'assets/icons/smartphone.svg',
-                  width: 32,
-                  height: 32,
-                ),
-                autoValidate: AutovalidateMode.onUserInteraction,
-                validator: (value) {
-                  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                    if (value == null && value!.isEmpty && value == '') {
-                      setState(() {
-                        _filledPhoneNumber = false;
-                      });
-                    } else {
-                      setState(() {
-                        _filledPhoneNumber = true;
-                      });
+              child: Form(
+                key: _formKey,
+                child: InputField(
+                  controller: _phoneNumberController,
+                  labelText: 'Номер телефона',
+                  keyboardType: TextInputType.phone,
+                  icon: SvgPicture.asset(
+                    'assets/icons/smartphone.svg',
+                    width: 32,
+                    height: 32,
+                  ),
+                  autoValidate: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                      if (value == '' || value!.length != 11) {
+                        setState(() {
+                          _filledPhoneNumber = false;
+                        });
+                      } else {
+                        setState(() {
+                          _filledPhoneNumber = true;
+                        });
+                      }
+                    });
+
+                    if (value == null || value.isEmpty) {
+                      return 'Пожалуйста введите номер телефона';
                     }
-                  });
 
-                  if (value == null || value.isEmpty) {
-                    return 'Пожалуйста введите номер телефона';
-                  } else {}
-
-                  return null;
-                },
+                    return null;
+                  },
+                ),
               ),
             ),
           ),
@@ -146,13 +152,19 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                 ))),
             onPressed: _filledPhoneNumber
                 ? () {
-                    print('Кнопка далее нажата');
+                    print('Кнопка отправить код нажата');
                     // dispose();
                     // if (_formKey.currentState!.validate()) {
                     //   // Процесс регистрации
                     // }
                     // previousStep();
-                    Navigator.of(context).pushNamed('/verificationScreen');
+                    // Navigator.of(context).pushNamed('/verificationScreen');
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => VerificationScreen(
+                            phoneNumber: _phoneNumberController.text),
+                      ),
+                    );
                   }
                 : null,
             child: Text(

@@ -14,9 +14,10 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => const FirstScreen(),
           '/phoneNumberScreen': (context) => const PhoneNumberScreen(),
-          '/verificationScreen': (context) => const VerificationScreen(),
+          // '/verificationScreen': (context) => VerificationScreen(),
           '/passwordCreateScreen': (context) => const PasswordCreateScreen(),
           '/personalDataScreen': (context) => const PersonalDataScreen(),
+          '/pinCodeScreen': (context) => const PinCodeScreen(),
         },
         // home: RegistrationScreen(),
       );
