@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/modules/registration_module/registration_module_import.dart';
+import 'package:flutter_rtk/src/app/widgets/input_sms_widget/input_sms_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +20,8 @@ class MyApp extends StatelessWidget {
           '/personalDataScreen': (context) => const PersonalDataScreen(),
           '/pinCodeScreen': (context) => const PinCodeScreen(),
         },
-        // home: RegistrationScreen(),
+        // home: VerificationScreen(
+        //   phoneNumber: '12345678',
+        // ),
       );
 }

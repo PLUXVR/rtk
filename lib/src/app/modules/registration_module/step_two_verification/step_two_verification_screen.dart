@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
+import 'package:flutter_rtk/src/app/modules/registration_module/step_five_PIN_code/pin_code_screen.dart';
 import 'package:flutter_rtk/src/app/widgets/app_bar/default_app_bar.dart';
+import 'package:flutter_rtk/src/app/widgets/input_sms_widget/input_sms_widget.dart';
 import 'package:flutter_rtk/src/app/widgets/rectangle_button/rectangle_button.dart';
 import 'package:flutter_rtk/src/app/widgets/step_bar/step_bar.dart';
 import 'package:flutter_rtk/src/app/widgets/text_info_widget/text_info_widget.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pincode_input_fields/pincode_input_fields.dart';
 
 class VerificationScreen extends StatefulWidget {
   final String phoneNumber;
@@ -75,11 +78,32 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 ),
               ),
             ),
-            child: const Padding(
-              padding: EdgeInsets.all(24.0),
-              child: Text(
-                '00000',
-                style: TextStyle(color: Colors.white),
+            child: Container(
+              decoration: BoxDecoration(color: appBarBackground),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: PincodeInputFields(
+                  length: 6,
+                  heigth: 54,
+                  width: 51,
+                  borderRadius: BorderRadius.circular(9),
+                  unfocusBorder: Border.all(
+                    width: 1,
+                    color: const Color(0xFF5B6774),
+                  ),
+                  focusBorder: Border.all(
+                    width: 1,
+                    color: const Color(0xFF9B71F4),
+                  ),
+                  cursorColor: Colors.white,
+                  cursorWidth: 2,
+                  focusFieldColor: const Color(0xFF2A2B32),
+                  unfocusFieldColor: const Color(0xFF2A2B32),
+                  textStyle: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 21,
+                  ),
+                ),
               ),
             ),
           ),

@@ -5,6 +5,7 @@ import 'package:flutter_rtk/src/app/widgets/rectangle_button/rectangle_button.da
 import 'package:flutter_rtk/src/app/widgets/step_bar/step_bar.dart';
 import 'package:flutter_rtk/src/app/widgets/text_info_widget/text_info_widget.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pincode_input_fields/pincode_input_fields.dart';
 
 class PinCodeScreen extends StatefulWidget {
   // final int stepsCount;
@@ -63,11 +64,32 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
                 ),
               ),
             ),
-            child: const Padding(
-              padding: EdgeInsets.all(24.0),
-              child: Text(
-                '0000',
-                style: TextStyle(color: Colors.white),
+            child: Container(
+              decoration: BoxDecoration(color: appBarBackground),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: PincodeInputFields(
+                  length: 4,
+                  heigth: 54,
+                  width: 51,
+                  borderRadius: BorderRadius.circular(9),
+                  unfocusBorder: Border.all(
+                    width: 1,
+                    color: const Color(0xFF5B6774),
+                  ),
+                  focusBorder: Border.all(
+                    width: 1,
+                    color: const Color(0xFF9B71F4),
+                  ),
+                  cursorColor: Colors.white,
+                  cursorWidth: 2,
+                  focusFieldColor: const Color(0xFF2A2B32),
+                  unfocusFieldColor: const Color(0xFF2A2B32),
+                  textStyle: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 21,
+                  ),
+                ),
               ),
             ),
           ),
