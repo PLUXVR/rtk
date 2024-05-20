@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_rtk/src/app/modules/registration_module/step_five_PIN_code/pin_code_screen.dart';
@@ -23,6 +25,31 @@ class VerificationScreen extends StatefulWidget {
 }
 
 class _VerificationScreenState extends State<VerificationScreen> {
+  final String trueInputCode = '000000';
+  bool isWrongSmsCode = false;
+
+  final pinCodeInputFieldsController = PincodeInputFieldsController();
+
+  int _seconds = 60;
+
+  void _startTimer() {
+    Timer.periodic(Duration(seconds: 1), (Timer timer) {
+      setState(() {
+        if (_seconds > 0) {
+          _seconds--;
+        } else {
+          timer.cancel();
+        }
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    _startTimer();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,6 +110,20 @@ class _VerificationScreenState extends State<VerificationScreen> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: PincodeInputFields(
+                  showError: isWrongSmsCode,
+                  controller: pinCodeInputFieldsController,
+                  onInputComplete: () {
+                    print('DONE');
+                    print(pinCodeInputFieldsController.toString());
+                    setState(() {
+                      if (pinCodeInputFieldsController.text == trueInputCode) {
+                        Navigator.of(context)
+                            .pushNamed('/passwordCreateScreen');
+                      } else {
+                        isWrongSmsCode = true;
+                      }
+                    });
+                  },
                   length: 6,
                   heigth: 54,
                   width: 51,
@@ -135,10 +176,12 @@ class _VerificationScreenState extends State<VerificationScreen> {
                             milliseconds: 150,
                           ),
                           child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed('/passwordCreateScreen');
-                            },
+                            onTap: _seconds > 0
+                                ? null
+                                : () {
+                                    Navigator.of(context)
+                                        .pushNamed('/passwordCreateScreen');
+                                  },
                             child: Row(
                               children: [
                                 SvgPicture.asset('assets/icons/refresh-cw.svg'),
@@ -166,17 +209,18 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: RichText(
-                    text: const TextSpan(
-                      style: TextStyle(fontSize: 12, color: AppColors.gray100),
+                    text: TextSpan(
+                      style: const TextStyle(
+                          fontSize: 12, color: AppColors.gray100),
                       children: [
-                        TextSpan(text: 'Попробовать снова через '),
-                        WidgetSpan(
+                        const TextSpan(text: 'Попробовать снова через '),
+                        const WidgetSpan(
                           child: SizedBox(
                             height: 20,
                           ),
                         ),
                         TextSpan(
-                            text: '24 секунды',
+                            text: "$_seconds",
                             style: TextStyle(color: AppColors.orange300)),
                       ],
                     ),
