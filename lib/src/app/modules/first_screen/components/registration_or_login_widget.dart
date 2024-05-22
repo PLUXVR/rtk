@@ -41,9 +41,9 @@ class RegistrationOrLoginWidget extends StatelessWidget {
                 print('Кнопка регистрации нажата');
                 Navigator.of(context).pushNamed('/phoneNumberScreen');
               },
-              child: Text(
+              child: const Text(
                 'Регистрация',
-                style: TextStyle(color: textColor),
+                style: TextStyle(color: AppColors.textPrimaryEnabled),
               ),
             ),
           ),
@@ -73,9 +73,9 @@ class RegistrationOrLoginWidget extends StatelessWidget {
               onPressed: () {
                 print('Кнопка входа нажата');
               },
-              child: Text(
+              child: const Text(
                 'Войти',
-                style: TextStyle(color: textColor),
+                style: TextStyle(color: AppColors.textPrimaryEnabled),
               ),
             ),
           ),

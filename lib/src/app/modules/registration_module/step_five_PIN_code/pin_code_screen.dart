@@ -153,10 +153,10 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
               // Navigator.of(context).pushNamed('/pinCodeScreen');
             },
             // : null,
-            child: Text(
+            child: const Text(
               'Продолжить',
               style: TextStyle(
-                color: textColor,
+                color: AppColors.textPrimaryEnabled,
                 //     : AppColors.disabledTextColor,
                 // fontWeight: FontWeight.w700),
               ),

@@ -19,19 +19,19 @@ class WelcomeWidget extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-          Text(
+          const Text(
             textAlign: TextAlign.center,
             "Добро пожаловать",
-            style: TextStyle(color: textColor, fontSize: 21),
+            style: TextStyle(color: AppColors.textPrimaryEnabled, fontSize: 21),
           ),
           const SizedBox(
             height: 20,
           ),
-          Text(
+          const Text(
             textAlign: TextAlign.center,
             "Зарегистрируйтесь\n или войдите в приложение",
             style: TextStyle(
-              color: textColor,
+              color: AppColors.textPrimaryEnabled,
               fontSize: 12,
             ),
           ),

@@ -171,8 +171,8 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
               'Отправить код',
               style: TextStyle(
                   color: _filledPhoneNumber
-                      ? textColor
-                      : AppColors.disabledTextColor,
+                      ? AppColors.textPrimaryEnabled
+                      : AppColors.textPrimaryDisabled,
                   fontWeight: FontWeight.w700),
             ),
           ),

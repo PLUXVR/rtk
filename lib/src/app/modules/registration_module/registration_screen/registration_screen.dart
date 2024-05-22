@@ -299,7 +299,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               style: _minSymbolsValid &&
                       _lowerAndUpperCaseValid &&
                       _personalInfoInPassValid
-                  ? TextStyle(color: textColor)
+                  ? const TextStyle(color: AppColors.textPrimaryEnabled)
                   : TextStyle(color: textColorButtonBlocked),
             ),
           ),

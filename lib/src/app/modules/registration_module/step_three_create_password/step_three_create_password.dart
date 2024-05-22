@@ -292,8 +292,8 @@ class _PasswordCreateScreenState extends State<PasswordCreateScreen> {
                           _lowerAndUpperCaseValid &&
                           _isOneNumOnPasswordValid &&
                           _passMatch
-                      ? textColor
-                      : AppColors.disabledTextColor,
+                      ? AppColors.textPrimaryEnabled
+                      : AppColors.textPrimaryDisabled,
                   fontWeight: FontWeight.w700),
             ),
           ),

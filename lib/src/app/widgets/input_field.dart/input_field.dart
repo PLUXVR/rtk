@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_svg/svg.dart';
 
 // Поле ввода информации
@@ -35,9 +36,9 @@ class InputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // height: 54,
-      decoration: BoxDecoration(
-        color: inputBackgroundColor ?? const Color.fromARGB(255, 36, 37, 43),
-        borderRadius: const BorderRadius.only(
+      decoration: const BoxDecoration(
+        color: AppColors.gray700,
+        borderRadius: BorderRadius.only(
           topLeft: Radius.circular(8),
           topRight: Radius.circular(8),
         ),

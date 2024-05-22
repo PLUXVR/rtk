@@ -33,14 +33,16 @@ class _VerificationScreenState extends State<VerificationScreen> {
   int _seconds = 60;
 
   void _startTimer() {
-    Timer.periodic(Duration(seconds: 1), (Timer timer) {
-      setState(() {
-        if (_seconds > 0) {
-          _seconds--;
-        } else {
-          timer.cancel();
-        }
-      });
+    Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      if (mounted) {
+        setState(() {
+          if (_seconds > 0) {
+            _seconds--;
+          } else {
+            timer.cancel();
+          }
+        });
+      }
     });
   }
 
@@ -77,16 +79,16 @@ class _VerificationScreenState extends State<VerificationScreen> {
             headingText: "Подтвердите номер телефона",
             bodyText: RichText(
               text: TextSpan(
-                style:
-                    TextStyle(fontSize: 12, color: Colors.white, height: 1.5),
+                style: const TextStyle(
+                    fontSize: 12, color: Colors.white, height: 1.5),
                 children: [
-                  TextSpan(
+                  const TextSpan(
                       text:
                           'Мы только что отправили 6-значный код \nна ваш номер телефона '),
                   TextSpan(
                       text: widget.phoneNumber,
-                      style: TextStyle(color: AppColors.orange300)),
-                  TextSpan(text: ':'),
+                      style: const TextStyle(color: AppColors.orange300)),
+                  const TextSpan(text: ':'),
                 ],
               ),
             ),
@@ -114,7 +116,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   controller: pinCodeInputFieldsController,
                   onInputComplete: () {
                     print('DONE');
-                    print(pinCodeInputFieldsController.toString());
+                    print(pinCodeInputFieldsController.text);
                     setState(() {
                       if (pinCodeInputFieldsController.text == trueInputCode) {
                         Navigator.of(context)
@@ -155,49 +157,54 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: _seconds > 0
+                        ? null
+                        : () {
+                            print('Timer');
+                            _seconds = 60;
+                            _startTimer();
+                          },
                     child: AnimatedContainer(
                       height: 36,
                       width: 116,
                       duration: const Duration(
-                        milliseconds: 150,
+                        milliseconds: 50,
                       ),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(3),
                         ),
-                        color: AppColors.neutal700,
+                        color: _seconds > 0
+                            ? AppColors.neutal800
+                            : AppColors.neutal700,
                         shape: BoxShape.rectangle,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 11),
-                        child: AnimatedContainer(
-                          duration: const Duration(
-                            milliseconds: 150,
-                          ),
-                          child: GestureDetector(
-                            onTap: _seconds > 0
-                                ? null
-                                : () {
-                                    Navigator.of(context)
-                                        .pushNamed('/passwordCreateScreen');
-                                  },
-                            child: Row(
-                              children: [
-                                SvgPicture.asset('assets/icons/refresh-cw.svg'),
-                                const SizedBox(
-                                  width: 6,
-                                ),
-                                const Expanded(
-                                  child: Text(
-                                    'Не получил код',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 9),
-                                  ),
-                                ),
-                              ],
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/icons/refresh-cw.svg',
+                              colorFilter: ColorFilter.mode(
+                                  _seconds > 0
+                                      ? AppColors.textPrimaryDisabled
+                                      : AppColors.textPrimaryEnabled,
+                                  BlendMode.srcIn),
                             ),
-                          ),
+                            const SizedBox(
+                              width: 6,
+                            ),
+                            Expanded(
+                              child: Text(
+                                'Не получил код',
+                                style: TextStyle(
+                                    color: _seconds > 0
+                                        ? AppColors.textPrimaryDisabled
+                                        : Colors.white,
+                                    fontSize: 9),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -221,7 +228,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         ),
                         TextSpan(
                             text: "$_seconds",
-                            style: TextStyle(color: AppColors.orange300)),
+                            style: const TextStyle(color: AppColors.orange300)),
                       ],
                     ),
                   ),

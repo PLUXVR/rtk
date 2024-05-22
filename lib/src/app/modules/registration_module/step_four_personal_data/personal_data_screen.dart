@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_rtk/src/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flutter_rtk/src/app/widgets/input_field.dart/input_field.dart';
@@ -17,9 +19,19 @@ class PersonalDataScreen extends StatefulWidget {
 class _PersonalDataScreenState extends State<PersonalDataScreen> {
   final _formKey = GlobalKey<FormState>();
   // Проверка на соответствие паролей
+  final List<String> _questions = [
+    'Как зовут вашего любимого питомца',
+    'Место рождения',
+    'Последние четыре цифры номера вашей карты',
+    'Имя первого учителя',
+  ]; // Option 2
+  // Option 2
+  String selectedQuestion = '';
 
   @override
   Widget build(BuildContext context) {
+    // selectedQuestion = _questions[0];
+
     return Scaffold(
       backgroundColor: bodyBackgroundColor,
       appBar: DefaultAppBar(
@@ -130,8 +142,61 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 18,
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 30),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Введите ответ на контрольный вопрос",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: AppColors.textPrimaryEnabled,
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24.0,
+            ),
+            child: Container(
+              height: 54,
+              decoration: BoxDecoration(
+                color: AppColors.gray700,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(8),
+                  topRight: Radius.circular(8),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: DropdownButton(
+                  dropdownColor: AppColors.neutal800,
+                  hint: Text(
+                    selectedQuestion,
+                    style: TextStyle(color: AppColors.textPrimaryEnabled),
+                  ),
+                  isExpanded: true,
+                  iconSize: 30.0,
+                  style: TextStyle(color: AppColors.textPrimaryEnabled),
+                  items: _questions.map(
+                    (val) {
+                      return DropdownMenuItem<String>(
+                        value: val,
+                        child: Text(val),
+                      );
+                    },
+                  ).toList(),
+                  onChanged: (val) {
+                    setState(
+                      () {
+                        selectedQuestion = val!;
+                      },
+                    );
+                  },
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -167,10 +232,10 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
               Navigator.of(context).pushNamed('/pinCodeScreen');
             },
             // : null,
-            child: Text(
+            child: const Text(
               'Продолжить',
               style: TextStyle(
-                color: textColor,
+                color: AppColors.textPrimaryEnabled,
                 //     : AppColors.disabledTextColor,
                 // fontWeight: FontWeight.w700),
               ),

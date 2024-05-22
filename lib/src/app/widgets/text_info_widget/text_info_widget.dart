@@ -25,8 +25,8 @@ class TextInfoWidget extends StatelessWidget {
                 Text(
                   headingText,
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: textColor,
+                  style: const TextStyle(
+                      color: AppColors.textPrimaryEnabled,
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
                 ),
