@@ -21,6 +21,7 @@ abstract final class AppColors {
   static const gray700 = Color(0xFF2A2B32);
   static const orange300 = Color(0xFFF98760);
   static const neutal50 = Color(0xFFDEE4EC);
+  static const neutal100 = Color(0xFFB7C2D1);
   static const neutal700 = Color(0xFF39414A);
   static const neutal800 = Color(0xFF2D333A);
   static const gray100 = Color(0xFFAEAFB2);

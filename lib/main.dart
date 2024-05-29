@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/modules/registration_module/registration_module_import.dart';
-import 'package:flutter_rtk/src/app/widgets/input_sms_widget/input_sms_widget.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
-import 'package:flutter_svg/svg.dart';
 
 // Поле ввода информации
 
-class InputField extends StatelessWidget {
+class AnswerInputField extends StatelessWidget {
   final TextEditingController? controller;
   final AutovalidateMode? autoValidate;
   final bool? obcureText;
   final Color? inputBackgroundColor;
-  final Widget? icon;
   final String? labelText;
   final Color? textColor;
   final String? hintText;
-  final Widget? suffixIcon;
   final TextInputType? keyboardType;
   final String? Function(String?) validator;
 
-  const InputField({
+  const AnswerInputField({
     super.key,
     this.controller,
     this.autoValidate,
     this.obcureText,
     this.inputBackgroundColor,
-    this.icon,
-    this.suffixIcon,
     this.labelText,
     this.textColor,
     this.hintText,
@@ -35,8 +30,9 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: 54,
+      height: 54,
       decoration: const BoxDecoration(
+        // border: Border.all(width: 10, color: Colors.red,),
         color: AppColors.gray700,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(8),
@@ -52,21 +48,15 @@ class InputField extends StatelessWidget {
         ),
         keyboardType: keyboardType,
         decoration: InputDecoration(
-            prefixIcon: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: icon ??
-                  SvgPicture.asset(
-                    'assets/icons/at-sign.svg',
-                    width: 32,
-                    height: 32,
-                  ),
-            ),
-            labelStyle: TextStyle(
-              color: textColor ?? const Color.fromRGBO(239, 239, 239, 1),
-              fontSize: 16,
-            ),
-            labelText: labelText ?? '???',
-            suffixIcon: suffixIcon),
+          contentPadding: const EdgeInsets.only(
+            left: 15,
+          ),
+          labelStyle: TextStyle(
+            color: textColor ?? AppColors.gray100,
+            fontSize: 16,
+          ),
+          labelText: labelText ?? '???',
+        ),
         validator: validator,
       ),
     );
