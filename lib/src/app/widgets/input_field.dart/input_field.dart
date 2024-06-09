@@ -43,7 +43,16 @@ class InputField extends StatelessWidget {
           topRight: Radius.circular(8),
         ),
       ),
-      child: TextFormField(
+      child:
+          // FormField(
+          //   initialValue: '',
+          //   validator: validator,
+          //   builder: (state) {
+          // return
+          // Column(
+          // children: [
+          TextFormField(
+        // onChanged: (value) => state.didChange(value),
         controller: controller,
         autovalidateMode: autoValidate,
         obscureText: obcureText ?? false,
@@ -69,6 +78,17 @@ class InputField extends StatelessWidget {
             suffixIcon: suffixIcon),
         validator: validator,
       ),
+      // if (state.hasError)
+
+      //   Row(
+      //     children: [
+      //       Text('Error: ${state.errorText} ?? ' ''),
+      //     ],
+      //   ),
+      // ],
+      // );
+      // },
+      // ),
     );
   }
 }
