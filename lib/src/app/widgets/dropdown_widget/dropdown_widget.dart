@@ -1,54 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
-
-void main() {
-  runApp(const DropdownMenuWidget());
-}
+import 'package:flutter_svg/svg.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class DropdownMenuWidget extends StatefulWidget {
-  const DropdownMenuWidget({super.key});
+  final List<String>? questionList;
+
+  const DropdownMenuWidget({super.key, required this.questionList});
 
   @override
   State<DropdownMenuWidget> createState() => _DropdownMenuWidgetState();
 }
 
 class _DropdownMenuWidgetState extends State<DropdownMenuWidget> {
-  final TextEditingController questionController = TextEditingController();
-  String? selectedQuestion;
-
-  List<String> questionsList = [
-    'Как зовут вашего любимого питомца',
-    'Место рождения',
-    'Последние четыре цифры номера вашей карты',
-    'Имя первого учителя',
-  ];
+  String selectedQuestion = 'Выберите контрольный вопрос';
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Expanded(
-        child: DropdownMenu<String>(
-          // width: 300,
-          controller: questionController,
-          enableFilter: true,
-          // requestFocusOnTap: true,
-          // leadingIcon: const Icon(Icons.search),
-          // label: const Text('Контрольный вопрос'),
-          hintText: 'Контрольный вопрос',
-          inputDecorationTheme: const InputDecorationTheme(
-            filled: true,
-            contentPadding: EdgeInsets.only(left: 10, top: 5.0, bottom: 5.0),
+    return Container(
+      height: 54,
+      decoration: const BoxDecoration(
+        color: AppColors.gray700,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(8),
+          topRight: Radius.circular(8),
+        ),
+        border: Border(
+          bottom: BorderSide(
+            color: AppColors.neutal100,
+            width: 1.0,
           ),
-
-          dropdownMenuEntries: questionsList.map<DropdownMenuEntry<String>>(
-            (String question) {
-              return DropdownMenuEntry<String>(
-                value: question,
-                label: question,
+        ),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton(
+          icon: Padding(
+            padding: const EdgeInsets.only(right: 15.0),
+            child: SvgPicture.asset("assets/icons/vector.svg"),
+          ),
+          dropdownColor: AppColors.neutal800,
+          hint: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: AutoSizeText(
+              maxLines: 1,
+              selectedQuestion,
+              style: const TextStyle(color: AppColors.textPrimaryEnabled),
+            ),
+          ),
+          isExpanded: true,
+          iconSize: 30.0,
+          style: const TextStyle(color: AppColors.textPrimaryEnabled),
+          items: widget.questionList!.map(
+            (val) {
+              return DropdownMenuItem<String>(
+                value: val,
+                child: Text(val),
               );
             },
           ).toList(),
+          onChanged: (val) {
+            setState(
+              () {
+                selectedQuestion = val!;
+              },
+            );
+          },
         ),
       ),
     );

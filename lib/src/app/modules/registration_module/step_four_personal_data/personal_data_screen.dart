@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
+import 'package:flutter_rtk/src/app/widgets/answer_input_field/answer_input.dart';
 import 'package:flutter_rtk/src/app/widgets/app_bar/default_app_bar.dart';
+import 'package:flutter_rtk/src/app/widgets/dropdown_widget/dropdown_widget.dart';
 import 'package:flutter_rtk/src/app/widgets/input_field.dart/input_field.dart';
 import 'package:flutter_rtk/src/app/widgets/rectangle_button/rectangle_button.dart';
 import 'package:flutter_rtk/src/app/widgets/step_bar/step_bar.dart';
@@ -161,44 +161,25 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
               padding: const EdgeInsets.symmetric(
                 horizontal: 24.0,
               ),
-              child: Container(
-                height: 54,
-                decoration: const BoxDecoration(
-                  color: AppColors.gray700,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    topRight: Radius.circular(8),
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: DropdownButton(
-                    dropdownColor: AppColors.neutal800,
-                    hint: Text(
-                      selectedQuestion,
-                      style:
-                          const TextStyle(color: AppColors.textPrimaryEnabled),
-                    ),
-                    isExpanded: true,
-                    iconSize: 30.0,
-                    style: const TextStyle(color: AppColors.textPrimaryEnabled),
-                    items: _questions.map(
-                      (val) {
-                        return DropdownMenuItem<String>(
-                          value: val,
-                          child: Text(val),
-                        );
-                      },
-                    ).toList(),
-                    onChanged: (val) {
-                      setState(
-                        () {
-                          selectedQuestion = val!;
-                        },
-                      );
-                    },
-                  ),
-                ),
+              child: DropdownMenuWidget(
+                questionList: _questions,
+              ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24.0,
+              ),
+              child: AnswerInput(
+                autoValidate: AutovalidateMode.onUserInteraction,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Пожалуйста ответ на контрольный вопрос';
+                  }
+                  return null;
+                },
               ),
             ),
           ],

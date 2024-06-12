@@ -11,16 +11,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         title: 'Flutter RTK',
-        routes: {
-          '/': (context) => const FirstScreen(),
-          '/phoneNumberScreen': (context) => const PhoneNumberScreen(),
-          // '/verificationScreen': (context) => VerificationScreen(),
-          '/passwordCreateScreen': (context) => const PasswordCreateScreen(),
-          '/personalDataScreen': (context) => const PersonalDataScreen(),
-          '/pinCodeScreen': (context) => const PinCodeScreen(),
-        },
-        // home: VerificationScreen(
-        //   phoneNumber: '12345678',
-        // ),
+        // routes: {
+        //   '/': (context) => const FirstScreen(),
+        //   '/phoneNumberScreen': (context) => const PhoneNumberScreen(),
+        //   // '/verificationScreen': (context) => VerificationScreen(),
+        //   '/passwordCreateScreen': (context) => const PasswordCreateScreen(),
+        //   '/personalDataScreen': (context) => const PersonalDataScreen(),
+        //   '/pinCodeScreen': (context) => const PinCodeScreen(),
+        // },
+        home: const PersonalDataScreen(),
       );
 }
