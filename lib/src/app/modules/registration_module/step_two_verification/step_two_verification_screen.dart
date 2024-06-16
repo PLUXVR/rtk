@@ -55,7 +55,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        backgroundColor: bodyBackgroundColor,
+        backgroundColor: AppColors.gray900,
         appBar: DefaultAppBar(
           additionHeight: 20,
           titleText: "Шаг 2 из 5",
@@ -108,7 +108,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 ),
               ),
               child: Container(
-                decoration: BoxDecoration(color: appBarBackground),
+                decoration: const BoxDecoration(color: AppColors.gray800),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: PincodeInputFields(
@@ -176,8 +176,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                             Radius.circular(3),
                           ),
                           color: _seconds > 0
-                              ? AppColors.neutal800
-                              : AppColors.neutal700,
+                              ? AppColors.neutral800
+                              : AppColors.neutral700,
                           shape: BoxShape.rectangle,
                         ),
                         child: Padding(
@@ -188,8 +188,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                 'assets/icons/refresh-cw.svg',
                                 colorFilter: ColorFilter.mode(
                                     _seconds > 0
-                                        ? AppColors.textPrimaryDisabled
-                                        : AppColors.textPrimaryEnabled,
+                                        ? AppColors.neutral500
+                                        : AppColors.neutral50,
                                     BlendMode.srcIn),
                               ),
                               const SizedBox(
@@ -200,8 +200,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                   'Не получил код',
                                   style: TextStyle(
                                       color: _seconds > 0
-                                          ? AppColors.textPrimaryDisabled
-                                          : Colors.white,
+                                          ? AppColors.neutral500
+                                          : AppColors.gray50,
                                       fontSize: 9),
                                 ),
                               ),

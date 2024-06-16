@@ -53,7 +53,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        backgroundColor: bodyBackgroundColor,
+        backgroundColor: AppColors.gray900,
         appBar: DefaultAppBar(
           additionHeight: 20,
           titleText: "Шаг 1 из 5",
@@ -153,7 +153,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                   shadowColor: const MaterialStatePropertyAll(Colors.black),
                   elevation: const MaterialStatePropertyAll(2),
                   backgroundColor: _filledPhoneNumber
-                      ? MaterialStateProperty.all(buttonNextColorActive)
+                      ? MaterialStateProperty.all(AppColors.purple500)
                       : MaterialStateProperty.all(AppColors.purple800),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -179,8 +179,8 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                 'Отправить код',
                 style: TextStyle(
                     color: _filledPhoneNumber
-                        ? AppColors.textPrimaryEnabled
-                        : AppColors.textPrimaryDisabled,
+                        ? AppColors.gray50
+                        : AppColors.neutral500,
                     fontWeight: FontWeight.w700),
               ),
             ),

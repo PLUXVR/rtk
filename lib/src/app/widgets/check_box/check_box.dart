@@ -45,8 +45,8 @@ class DefaultCheckBox extends StatelessWidget {
                       padding: const EdgeInsets.all(5),
                       child: SvgPicture.asset(
                         'assets/icons/alert-cross.svg',
-                        colorFilter: ColorFilter.mode(
-                            bodyBackgroundColor, BlendMode.srcIn),
+                        colorFilter: const ColorFilter.mode(
+                            AppColors.blue900, BlendMode.srcIn),
                       ),
                     )
                   : isValid
@@ -66,7 +66,7 @@ class DefaultCheckBox extends StatelessWidget {
                 checkBoxText ?? "",
                 style: const TextStyle(
                   fontSize: 12,
-                  color: AppColors.white,
+                  color: AppColors.gray50,
                 ),
               ),
             ],

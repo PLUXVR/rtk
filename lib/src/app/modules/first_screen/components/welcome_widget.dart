@@ -22,7 +22,7 @@ class WelcomeWidget extends StatelessWidget {
           const Text(
             textAlign: TextAlign.center,
             "Добро пожаловать",
-            style: TextStyle(color: AppColors.textPrimaryEnabled, fontSize: 21),
+            style: TextStyle(color: AppColors.white, fontSize: 21),
           ),
           const SizedBox(
             height: 20,
@@ -31,7 +31,7 @@ class WelcomeWidget extends StatelessWidget {
             textAlign: TextAlign.center,
             "Зарегистрируйтесь\n или войдите в приложение",
             style: TextStyle(
-              color: AppColors.textPrimaryEnabled,
+              color: AppColors.gray50,
               fontSize: 12,
             ),
           ),

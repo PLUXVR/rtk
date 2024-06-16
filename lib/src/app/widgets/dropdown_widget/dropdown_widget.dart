@@ -27,7 +27,7 @@ class _DropdownMenuWidgetState extends State<DropdownMenuWidget> {
         ),
         border: Border(
           bottom: BorderSide(
-            color: AppColors.neutal100,
+            color: AppColors.neutral100,
             width: 1.0,
           ),
         ),
@@ -38,18 +38,18 @@ class _DropdownMenuWidgetState extends State<DropdownMenuWidget> {
             padding: const EdgeInsets.only(right: 15.0),
             child: SvgPicture.asset("assets/icons/vector.svg"),
           ),
-          dropdownColor: AppColors.neutal800,
+          dropdownColor: AppColors.neutral800,
           hint: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: AutoSizeText(
               maxLines: 1,
               selectedQuestion,
-              style: const TextStyle(color: AppColors.textPrimaryEnabled),
+              style: const TextStyle(color: AppColors.gray50),
             ),
           ),
           isExpanded: true,
           iconSize: 30.0,
-          style: const TextStyle(color: AppColors.textPrimaryEnabled),
+          style: const TextStyle(color: AppColors.gray50),
           items: widget.questionList!.map(
             (val) {
               return DropdownMenuItem<String>(

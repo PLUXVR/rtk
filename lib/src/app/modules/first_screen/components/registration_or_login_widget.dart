@@ -33,7 +33,7 @@ class RegistrationOrLoginWidget extends StatelessWidget {
                   shadowColor: const MaterialStatePropertyAll(Colors.black),
                   elevation: const MaterialStatePropertyAll(2),
                   backgroundColor:
-                      MaterialStatePropertyAll(buttonNextColorActive),
+                      const MaterialStatePropertyAll(AppColors.purple500),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
                   ))),
@@ -43,7 +43,7 @@ class RegistrationOrLoginWidget extends StatelessWidget {
               },
               child: const Text(
                 'Регистрация',
-                style: TextStyle(color: AppColors.textPrimaryEnabled),
+                style: TextStyle(color: AppColors.gray50),
               ),
             ),
           ),
@@ -66,7 +66,7 @@ class RegistrationOrLoginWidget extends StatelessWidget {
                     Color.fromRGBO(30, 31, 36, 1),
                   ),
                   side: MaterialStateProperty.all<BorderSide>(
-                      BorderSide(color: textLogInButton)),
+                      const BorderSide(color: AppColors.neutral500)),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
                   ))),
@@ -75,7 +75,7 @@ class RegistrationOrLoginWidget extends StatelessWidget {
               },
               child: const Text(
                 'Войти',
-                style: TextStyle(color: AppColors.textPrimaryEnabled),
+                style: TextStyle(color: AppColors.neutral100),
               ),
             ),
           ),

@@ -57,7 +57,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bodyBackgroundColor,
+      backgroundColor: AppColors.gray900,
       appBar: const RegistrationAppBar(),
       body: ListView(
         children: [
@@ -278,8 +278,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 backgroundColor: MaterialStateProperty.all(_minSymbolsValid &&
                         _lowerAndUpperCaseValid &&
                         _personalInfoInPassValid
-                    ? buttonNextColorActive
-                    : buttonNextColorBlocked),
+                    ? AppColors.purple500
+                    : AppColors.purple800),
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
                 ))),
@@ -299,8 +299,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               style: _minSymbolsValid &&
                       _lowerAndUpperCaseValid &&
                       _personalInfoInPassValid
-                  ? const TextStyle(color: AppColors.textPrimaryEnabled)
-                  : TextStyle(color: textColorButtonBlocked),
+                  ? const TextStyle(color: AppColors.gray50)
+                  : const TextStyle(color: AppColors.neutral500),
             ),
           ),
         ),

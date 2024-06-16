@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_rtk/src/app/widgets/app_bar/default_app_bar.dart';
+import 'package:flutter_rtk/src/app/widgets/circular_prosgress_indicator/circular_progress_indicator.dart';
 import 'package:flutter_rtk/src/app/widgets/rectangle_button/rectangle_button.dart';
 import 'package:flutter_rtk/src/app/widgets/step_bar/step_bar.dart';
 import 'package:flutter_rtk/src/app/widgets/text_info_widget/text_info_widget.dart';
@@ -24,7 +25,7 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        backgroundColor: bodyBackgroundColor,
+        backgroundColor: AppColors.gray900,
         appBar: DefaultAppBar(
           additionHeight: 20,
           titleText: "Шаг 5 из 5",
@@ -67,7 +68,7 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
                 ),
               ),
               child: Container(
-                decoration: BoxDecoration(color: appBarBackground),
+                decoration: const BoxDecoration(color: AppColors.gray800),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: PincodeInputFields(
@@ -141,7 +142,7 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
                   shadowColor: const MaterialStatePropertyAll(Colors.black),
                   elevation: const MaterialStatePropertyAll(2),
                   backgroundColor:
-                      MaterialStateProperty.all(buttonNextColorActive),
+                      MaterialStateProperty.all(AppColors.purple500),
                   // : MaterialStateProperty.all(AppColors.purple800),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -154,12 +155,17 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
                 // }
                 // previousStep();
                 // Navigator.of(context).pushNamed('/pinCodeScreen');
+
+                showDialog(
+                  context: context,
+                  builder: ((context) => const ProgressIndicatorWidget()),
+                );
               },
               // : null,
               child: const Text(
                 'Продолжить',
                 style: TextStyle(
-                  color: AppColors.textPrimaryEnabled,
+                  color: AppColors.gray50,
                   //     : AppColors.disabledTextColor,
                   // fontWeight: FontWeight.w700),
                 ),

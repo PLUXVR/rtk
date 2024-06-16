@@ -35,7 +35,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        backgroundColor: bodyBackgroundColor,
+        backgroundColor: AppColors.gray900,
         appBar: DefaultAppBar(
           additionHeight: 20,
           titleText: "Шаг 4 из 5",
@@ -152,7 +152,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                   "Введите ответ на контрольный вопрос",
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                    color: AppColors.textPrimaryEnabled,
+                    color: AppColors.gray50,
                   ),
                 ),
               ),
@@ -201,7 +201,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                   shadowColor: const MaterialStatePropertyAll(Colors.black),
                   elevation: const MaterialStatePropertyAll(2),
                   backgroundColor:
-                      MaterialStateProperty.all(buttonNextColorActive),
+                      MaterialStateProperty.all(AppColors.purple500),
                   // : MaterialStateProperty.all(AppColors.purple800),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -219,7 +219,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
               child: const Text(
                 'Продолжить',
                 style: TextStyle(
-                  color: AppColors.textPrimaryEnabled,
+                  color: AppColors.gray50,
                   //     : AppColors.disabledTextColor,
                   // fontWeight: FontWeight.w700),
                 ),
