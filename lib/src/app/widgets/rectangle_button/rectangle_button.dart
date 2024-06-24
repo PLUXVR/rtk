@@ -8,6 +8,7 @@ class DefaultRectangleButton extends StatelessWidget {
   final Color? color;
   final double height;
   final double width;
+  final AlignmentGeometry? alignment;
   final VoidCallback? onTap;
 
   const DefaultRectangleButton({
@@ -16,6 +17,7 @@ class DefaultRectangleButton extends StatelessWidget {
     this.color,
     this.height = 32,
     this.width = 32,
+    this.alignment,
     this.onTap,
   });
 
@@ -34,7 +36,7 @@ class DefaultRectangleButton extends StatelessWidget {
               color: color ?? Colors.transparent,
               shape: BoxShape.rectangle,
             ),
-            alignment: Alignment.bottomRight,
+            alignment: alignment ?? Alignment.bottomRight,
             child: child ??
                 SvgPicture.asset(
                   'assets/icons/x-circle.svg',
