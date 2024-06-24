@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_rtk/src/app/widgets/check_box/check_box.dart';
 
 // Виджет с чекбоксами для валидации полей ввода информациии о пользователе

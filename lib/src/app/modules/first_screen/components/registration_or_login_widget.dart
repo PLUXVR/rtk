@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_rtk/src/app/modules/first_screen/components/div_text_div_widget.dart.dart';
+import 'package:flutter_rtk/src/app/widgets/alert_dialog_widget/alert_dialog_widget.dart';
 
 class RegistrationOrLoginWidget extends StatelessWidget {
   const RegistrationOrLoginWidget({super.key});
@@ -39,7 +40,12 @@ class RegistrationOrLoginWidget extends StatelessWidget {
                   ))),
               onPressed: () {
                 print('Кнопка регистрации нажата');
-                Navigator.of(context).pushNamed('/phoneNumberScreen');
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialogWidget();
+                    });
+                // Navigator.of(context).pushNamed('/phoneNumberScreen');
               },
               child: const Text(
                 'Регистрация',
