@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rtk/src/app/modules/auth_module/auth_screen/auth_screen.dart';
 import 'package:flutter_rtk/src/app/modules/registration_module/registration_module_import.dart';
 
 void main() {
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
           '/passwordCreateScreen': (context) => const PasswordCreateScreen(),
           '/personalDataScreen': (context) => const PersonalDataScreen(),
           '/pinCodeScreen': (context) => const PinCodeScreen(),
+          '/authScreen': (context) => const AuthScreen(),
         },
         // home: const PersonalDataScreen(),
       );

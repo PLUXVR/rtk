@@ -78,6 +78,7 @@ class RegistrationOrLoginWidget extends StatelessWidget {
                   ))),
               onPressed: () {
                 print('Кнопка входа нажата');
+                Navigator.of(context).pushNamed('/authScreen');
               },
               child: const Text(
                 'Войти',
