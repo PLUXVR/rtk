@@ -9,6 +9,7 @@ class DefaultRectangleButton extends StatelessWidget {
   final double height;
   final double width;
   final AlignmentGeometry? alignment;
+  final EdgeInsetsGeometry? padding;
   final VoidCallback? onTap;
 
   const DefaultRectangleButton({
@@ -18,6 +19,7 @@ class DefaultRectangleButton extends StatelessWidget {
     this.height = 32,
     this.width = 32,
     this.alignment,
+    this.padding,
     this.onTap,
   });
 
@@ -25,7 +27,7 @@ class DefaultRectangleButton extends StatelessWidget {
   Widget build(BuildContext context) => GestureDetector(
         onTap: onTap ?? () {},
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 23.0),
+          padding: padding ?? const EdgeInsets.symmetric(horizontal: 23.0),
           child: AnimatedContainer(
             height: height,
             width: width,

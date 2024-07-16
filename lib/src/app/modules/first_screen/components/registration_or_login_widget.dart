@@ -40,12 +40,7 @@ class RegistrationOrLoginWidget extends StatelessWidget {
                   ))),
               onPressed: () {
                 print('Кнопка регистрации нажата');
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialogWidget();
-                    });
-                // Navigator.of(context).pushNamed('/phoneNumberScreen');
+                Navigator.of(context).pushNamed('/phoneNumberScreen');
               },
               child: const Text(
                 'Регистрация',

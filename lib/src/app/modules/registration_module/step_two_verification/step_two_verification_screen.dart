@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
+import 'package:flutter_rtk/src/app/widgets/alert_dialog_widget/alert_dialog_widget.dart';
 import 'package:flutter_rtk/src/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flutter_rtk/src/app/widgets/rectangle_button/rectangle_button.dart';
 import 'package:flutter_rtk/src/app/widgets/step_bar/step_bar.dart';
@@ -158,13 +159,21 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   Align(
                     alignment: Alignment.topLeft,
                     child: GestureDetector(
-                      onTap: _seconds > 0
-                          ? null
-                          : () {
-                              print('Timer');
-                              _seconds = 60;
-                              _startTimer();
-                            },
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialogWidget();
+                            });
+                      },
+
+                      // _seconds > 0
+                      //     ? null
+                      //     : () {
+                      //         print('Timer');
+                      //         _seconds = 60;
+                      //         _startTimer();
+                      //       },
                       child: AnimatedContainer(
                         height: 36,
                         width: 116,
