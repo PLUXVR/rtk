@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_rtk/src/app/colors/colors.dart';
 import 'package:flutter_rtk/src/app/widgets/rectangle_button/rectangle_button.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,7 +17,7 @@ class AlertDialogWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: AppColors.transparent,
-      surfaceTintColor: AppColors.gray900,
+      surfaceTintColor: AppColors.neutral900,
       // shadowColor: AppColors.blue900,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
@@ -26,19 +25,26 @@ class AlertDialogWidget extends StatelessWidget {
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
+          const SizedBox(
+            height: 10,
+          ),
           Container(
-            decoration: BoxDecoration(color: Colors.red),
+            // decoration: BoxDecoration(color: Colors.red),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  title ?? 'Код не пришел?',
-                  style: const TextStyle(
-                    color: AppColors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    // height: 18,
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Text(
+                    title ?? 'Код не пришел?',
+                    style: const TextStyle(
+                      color: AppColors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      // height: 18,
+                    ),
                   ),
                 ),
                 DefaultRectangleButton(
@@ -55,7 +61,8 @@ class AlertDialogWidget extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0),
             child: SizedBox(
               width: 300,
               child: Text(
@@ -70,7 +77,75 @@ class AlertDialogWidget extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: SizedBox(
+              height: 20,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: SizedBox(
+              width: double.infinity,
+              height: 54,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    shadowColor: const MaterialStatePropertyAll(Colors.black),
+                    elevation: const MaterialStatePropertyAll(2),
+                    backgroundColor:
+                        MaterialStateProperty.all(AppColors.neutral700),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ))),
+                onPressed: () {},
+                child: const Text(
+                  'Отправить заново',
+                  style: TextStyle(
+                    color: AppColors.gray50,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: SizedBox(
+              height: 12,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: SizedBox(
+              width: double.infinity,
+              height: 54,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    shadowColor: const MaterialStatePropertyAll(Colors.black),
+                    elevation: const MaterialStatePropertyAll(2),
+                    backgroundColor:
+                        MaterialStateProperty.all(AppColors.neutral700),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ))),
+                onPressed: () {},
+                child: const Text(
+                  'Служба поддержки',
+                  style: TextStyle(
+                    color: AppColors.gray50,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: SizedBox(
+              height: 30,
+            ),
+          ),
         ],
       ),
     );
