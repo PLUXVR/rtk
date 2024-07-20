@@ -42,7 +42,7 @@ class AlertDialogWidget extends StatelessWidget {
                   ),
                 ),
                 DefaultRectangleButton(
-                  aligment: Alignment.center,
+                  alignment: Alignment.center,
                   child: SvgPicture.asset(
                     'assets/icons/x-circle.svg',
                     colorFilter: const ColorFilter.mode(
